@@ -1,0 +1,9 @@
+$ dotnet test -c Release --no-build --no-restore --logger trx;LogFileName=release.trx --results-directory docs/lab03/test-results --verbosity minimal
+Test run for <REPOSITORY>\tests\WarehouseStock.Tests\bin\Release\net8.0\WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Results File: <REPOSITORY>\docs\lab03\test-results\release.trx
+
+Passed!  - Failed:     0, Passed:    38, Skipped:     0, Total:    38, Duration: 107 ms - WarehouseStock.Tests.dll (net8.0)

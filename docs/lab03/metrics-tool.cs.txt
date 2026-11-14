@@ -1,0 +1,42 @@
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Text.Json;
+
+try
+{
+    var rows = new List<object>();
+    foreach (string file in args)
+    {
+        string source = File.ReadAllText(file);
+        var tree = CSharpSyntaxTree.ParseText(source);
+        var root = tree.GetRoot();
+        foreach (var routine in root.DescendantNodes().OfType<BaseMethodDeclarationSyntax>())
+        {
+            var body = (SyntaxNode?)routine.Body ?? routine.ExpressionBody;
+            if (body == null) continue;
+            var nodes = body.DescendantNodesAndSelf().ToArray();
+            int ifs = nodes.Count(n => n is IfStatementSyntax);
+            int loops = nodes.Count(n => n is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax);
+            int logical = nodes.Count(n => n.IsKind(SyntaxKind.LogicalAndExpression) || n.IsKind(SyntaxKind.LogicalOrExpression));
+            int ternary = nodes.Count(n => n is ConditionalExpressionSyntax);
+            int arms = nodes.OfType<SwitchExpressionArmSyntax>().Count(n => n.Pattern is not DiscardPatternSyntax);
+            int guards = nodes.Count(n => n is WhenClauseSyntax);
+            int catches = nodes.Count(n => n is CatchClauseSyntax);
+            int switches = nodes.OfType<CaseSwitchLabelSyntax>().Count();
+            int returns = nodes.Count(n => n is ReturnStatementSyntax);
+            int depth = nodes.Where(n => n is StatementSyntax && n is not BlockSyntax).Select(n => n.Ancestors().TakeWhile(a => a != body).Count(a => a is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax || a is IfStatementSyntax condition && condition.Statement.Span.Contains(n.Span))).DefaultIfEmpty(0).Max();
+            int loc = body.ToString().Split('\n').Count(l => !string.IsNullOrWhiteSpace(l) && l.Trim() is not "{" and not "}");
+            int physicalBodyLines = routine.Body == null ? 1 : routine.Body.CloseBraceToken.GetLocation().GetLineSpan().StartLinePosition.Line - routine.Body.OpenBraceToken.GetLocation().GetLineSpan().StartLinePosition.Line - 1;
+            string name = routine is MethodDeclarationSyntax method ? method.Identifier.Text : ((ConstructorDeclarationSyntax)routine).Identifier.Text;
+            rows.Add(new { file, name, cc = 1 + ifs + loops + logical + ternary + arms + guards + catches + switches, ifs, loops, logical, ternary, arms, guards, parameters = routine.ParameterList.Parameters.Count, returns, depth, loc, physicalBodyLines,
+                conditions = nodes.Where(n => n is IfStatementSyntax or ForStatementSyntax or ForEachStatementSyntax or ConditionalExpressionSyntax or WhenClauseSyntax or SwitchExpressionArmSyntax).Select(n => new { line = n.GetLocation().GetLineSpan().StartLinePosition.Line + 1, text = n switch { IfStatementSyntax x => x.Condition.ToString(), ForStatementSyntax x => x.Condition?.ToString(), ForEachStatementSyntax x => x.Expression.ToString(), _ => n.ToString().Split('\n')[0] } }).ToArray() });
+        }
+    }
+    Console.WriteLine(JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+}
+catch (Exception exception)
+{
+    Console.Error.WriteLine(exception.Message);
+    Environment.ExitCode = 1;
+}

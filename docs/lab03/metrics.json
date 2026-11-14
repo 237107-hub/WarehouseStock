@@ -1,0 +1,532 @@
+[
+  {
+    "file": "LegacyProcessor-before.cs.txt",
+    "name": "Process",
+    "cc": 31,
+    "ifs": 20,
+    "loops": 2,
+    "logical": 8,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 11,
+    "returns": 8,
+    "depth": 2,
+    "loc": 62,
+    "physicalBodyLines": 95,
+    "conditions": [
+      {
+        "line": 28,
+        "text": "docId <= 0"
+      },
+      {
+        "line": 34,
+        "text": "clientName == null || clientName == string.Empty"
+      },
+      {
+        "line": 40,
+        "text": "clientEmail == null || !clientEmail.Contains('@')"
+      },
+      {
+        "line": 46,
+        "text": "lines == null || lines.Count == 0"
+      },
+      {
+        "line": 52,
+        "text": "status != \"New\" && status != \"Approved\"\r\n            && status != \"Dispatched\" && status != \"Cancelled\""
+      },
+      {
+        "line": 59,
+        "text": "i < lines.Count"
+      },
+      {
+        "line": 61,
+        "text": "lines[i].Quantity <= 0"
+      },
+      {
+        "line": 67,
+        "text": "lines[i].UnitPrice < 0"
+      },
+      {
+        "line": 74,
+        "text": "lines[i].Quantity >= 10"
+      },
+      {
+        "line": 79,
+        "text": "isRegular"
+      },
+      {
+        "line": 81,
+        "text": "total > 5000"
+      },
+      {
+        "line": 83,
+        "text": "total > 2000"
+      },
+      {
+        "line": 85,
+        "text": "couponCode == \"SALE10\""
+      },
+      {
+        "line": 87,
+        "text": "couponCode == \"MINUS200\" && total > 1000"
+      },
+      {
+        "line": 89,
+        "text": "createdAt.DayOfWeek == DayOfWeek.Sunday"
+      },
+      {
+        "line": 91,
+        "text": "total < 1000"
+      },
+      {
+        "line": 93,
+        "text": "total < 0"
+      },
+      {
+        "line": 96,
+        "text": "status == \"New\" && total > 0"
+      },
+      {
+        "line": 98,
+        "text": "status == \"Approved\""
+      },
+      {
+        "line": 100,
+        "text": "status == \"Cancelled\""
+      },
+      {
+        "line": 106,
+        "text": "printToConsole"
+      },
+      {
+        "line": 111,
+        "text": "i < lines.Count"
+      }
+    ]
+  },
+  {
+    "file": "DocumentGuards.cs",
+    "name": "EnsureHeaderValid",
+    "cc": 2,
+    "ifs": 1,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 3,
+    "returns": 0,
+    "depth": 1,
+    "loc": 5,
+    "physicalBodyLines": 7,
+    "conditions": [
+      {
+        "line": 16,
+        "text": "!recipientEmail.Contains('@')"
+      }
+    ]
+  },
+  {
+    "file": "DocumentGuards.cs",
+    "name": "EnsureLineValid",
+    "cc": 1,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 0,
+    "loc": 4,
+    "physicalBodyLines": 4,
+    "conditions": []
+  },
+  {
+    "file": "DocumentGuards.cs",
+    "name": "EnsureLinesValid",
+    "cc": 3,
+    "ifs": 1,
+    "loops": 1,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 1,
+    "loc": 5,
+    "physicalBodyLines": 10,
+    "conditions": [
+      {
+        "line": 37,
+        "text": "lines.Count == 0"
+      },
+      {
+        "line": 42,
+        "text": "lines"
+      }
+    ]
+  },
+  {
+    "file": "DocumentGuards.cs",
+    "name": "EnsureStatusValid",
+    "cc": 2,
+    "ifs": 1,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 1,
+    "loc": 3,
+    "physicalBodyLines": 5,
+    "conditions": [
+      {
+        "line": 52,
+        "text": "!Enum.IsDefined(status)"
+      }
+    ]
+  },
+  {
+    "file": "DocumentGuards.cs",
+    "name": "EnsureRequestValid",
+    "cc": 1,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 0,
+    "loc": 7,
+    "physicalBodyLines": 7,
+    "conditions": []
+  },
+  {
+    "file": "DocumentGuards.cs",
+    "name": "EnsureResultValid",
+    "cc": 1,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 0,
+    "loc": 3,
+    "physicalBodyLines": 3,
+    "conditions": []
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "Calculate",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 1,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 1,
+    "depth": 0,
+    "loc": 10,
+    "physicalBodyLines": 10,
+    "conditions": [
+      {
+        "line": 18,
+        "text": "request.Status == DocumentStatus.Cancelled\r"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "SubtotalOf",
+    "cc": 3,
+    "ifs": 1,
+    "loops": 1,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 1,
+    "depth": 2,
+    "loc": 8,
+    "physicalBodyLines": 14,
+    "conditions": [
+      {
+        "line": 30,
+        "text": "lines"
+      },
+      {
+        "line": 33,
+        "text": "line.Quantity >= PricingRules.BulkQuantity"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "ClientDiscountOf",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 1,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 2,
+    "returns": 1,
+    "depth": 0,
+    "loc": 2,
+    "physicalBodyLines": 2,
+    "conditions": [
+      {
+        "line": 51,
+        "text": "isRegularClient ? amount * PricingRules.RegularClientRate : 0m"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "VolumeDiscountOf",
+    "cc": 3,
+    "ifs": 1,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 1,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 2,
+    "depth": 1,
+    "loc": 4,
+    "physicalBodyLines": 7,
+    "conditions": [
+      {
+        "line": 60,
+        "text": "amount > PricingRules.LargeOrderFrom"
+      },
+      {
+        "line": 65,
+        "text": "amount > PricingRules.MediumOrderFrom ? amount * PricingRules.MediumOrderRate : 0m"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "CouponDiscountOf",
+    "cc": 4,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 2,
+    "guards": 1,
+    "parameters": 2,
+    "returns": 1,
+    "depth": 0,
+    "loc": 7,
+    "physicalBodyLines": 8,
+    "conditions": [
+      {
+        "line": 77,
+        "text": "PricingRules.SaleCoupon => amount * PricingRules.CouponSaleRate"
+      },
+      {
+        "line": 78,
+        "text": "PricingRules.FixedCoupon when amount > PricingRules.CouponFixedFrom\r"
+      },
+      {
+        "line": 78,
+        "text": "when amount > PricingRules.CouponFixedFrom"
+      },
+      {
+        "line": 80,
+        "text": "_ => 0m"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "WeekendDiscountOf",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 1,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 2,
+    "returns": 1,
+    "depth": 0,
+    "loc": 2,
+    "physicalBodyLines": 2,
+    "conditions": [
+      {
+        "line": 91,
+        "text": "createdAt.DayOfWeek == DayOfWeek.Sunday ? amount * PricingRules.WeekendRate : 0m"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "DeliveryFeeOf",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 1,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 2,
+    "returns": 1,
+    "depth": 0,
+    "loc": 3,
+    "physicalBodyLines": 3,
+    "conditions": [
+      {
+        "line": 102,
+        "text": "amount < PricingRules.FreeDeliveryFrom ? deliveryPrice : 0m"
+      }
+    ]
+  },
+  {
+    "file": "DocumentTotalCalculator.cs",
+    "name": "NextStatusOf",
+    "cc": 4,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 2,
+    "guards": 1,
+    "parameters": 2,
+    "returns": 1,
+    "depth": 0,
+    "loc": 7,
+    "physicalBodyLines": 8,
+    "conditions": [
+      {
+        "line": 115,
+        "text": "DocumentStatus.New when total > 0m => DocumentStatus.Approved"
+      },
+      {
+        "line": 115,
+        "text": "when total > 0m"
+      },
+      {
+        "line": 116,
+        "text": "DocumentStatus.Approved => DocumentStatus.Dispatched"
+      },
+      {
+        "line": 117,
+        "text": "_ => current"
+      }
+    ]
+  },
+  {
+    "file": "Transfer.cs",
+    "name": "AddLine",
+    "cc": 1,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 0,
+    "loc": 5,
+    "physicalBodyLines": 5,
+    "conditions": []
+  },
+  {
+    "file": "Transfer.cs",
+    "name": "Total",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 1,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 0,
+    "returns": 1,
+    "depth": 1,
+    "loc": 4,
+    "physicalBodyLines": 7,
+    "conditions": [
+      {
+        "line": 42,
+        "text": "_lines"
+      }
+    ]
+  },
+  {
+    "file": "DocumentReport.cs",
+    "name": "TextOf",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 1,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 2,
+    "returns": 1,
+    "depth": 1,
+    "loc": 14,
+    "physicalBodyLines": 17,
+    "conditions": [
+      {
+        "line": 23,
+        "text": "request.Lines"
+      }
+    ]
+  },
+  {
+    "file": "DocumentReportPrinter.cs",
+    "name": "DocumentReportPrinter",
+    "cc": 1,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 0,
+    "loc": 2,
+    "physicalBodyLines": 2,
+    "conditions": []
+  },
+  {
+    "file": "DocumentReportPrinter.cs",
+    "name": "Print",
+    "cc": 1,
+    "ifs": 0,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 0,
+    "depth": 0,
+    "loc": 2,
+    "physicalBodyLines": 2,
+    "conditions": []
+  }
+]

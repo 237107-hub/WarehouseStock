@@ -7,7 +7,8 @@ internal static class DocumentGuards
     /// <param name="documentId">Додатний номер документа.</param>
     /// <param name="recipientName">Непорожня назва одержувача.</param>
     /// <param name="recipientEmail">Адреса пошти одержувача.</param>
-    public static void EnsureHeaderValid(int documentId, string recipientName, string recipientEmail)
+    public static void EnsureHeaderValid(
+        int documentId, string recipientName, string recipientEmail)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(documentId);
         ArgumentException.ThrowIfNullOrWhiteSpace(recipientName);
@@ -50,7 +51,8 @@ internal static class DocumentGuards
     {
         if (!Enum.IsDefined(status))
         {
-            throw new ArgumentOutOfRangeException(nameof(status), status, "Невідомий стан документа.");
+            throw new ArgumentOutOfRangeException(
+                nameof(status), status, "Невідомий стан документа.");
         }
     }
 
@@ -63,7 +65,8 @@ internal static class DocumentGuards
         EnsureHeaderValid(request.DocumentId, request.Recipient.Name, request.Recipient.Email);
         EnsureLinesValid(request.Lines);
         EnsureStatusValid(request.Status);
-        ArgumentOutOfRangeException.ThrowIfNegative(request.DeliveryPrice, nameof(request.DeliveryPrice));
+        ArgumentOutOfRangeException.ThrowIfNegative(
+            request.DeliveryPrice, nameof(request.DeliveryPrice));
     }
 
     /// <summary>Перевіряє результат перед формуванням звіту.</summary>

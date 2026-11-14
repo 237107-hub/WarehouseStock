@@ -1,0 +1,7 @@
+$ dotnet run --project WarehouseStock.App -c Release --no-build --no-restore
+Документ № 2
+Одержувач: Західний склад
+Пошта: west@example.com
+A1 x 2
+Разом: 420.00
+Стан: Dispatched

@@ -1,6 +1,6 @@
 using System.Text;
-using WarehouseStock.Core.Reporting;
 using WarehouseStock.Core.Documents;
+using WarehouseStock.Core.Reporting;
 
 TotalRequest request = new()
 {

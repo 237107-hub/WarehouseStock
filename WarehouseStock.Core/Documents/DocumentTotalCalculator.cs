@@ -15,7 +15,8 @@ public static class DocumentTotalCalculator
         total -= CouponDiscountOf(total, request.CouponCode);
         total -= WeekendDiscountOf(total, request.CreatedAt);
         total += DeliveryFeeOf(total, request.DeliveryPrice);
-        total = request.Status == DocumentStatus.Cancelled ? 0m : Math.Round(Math.Max(total, 0m), 2);
+        total = request.Status == DocumentStatus.Cancelled
+            ? 0m : Math.Round(Math.Max(total, 0m), 2);
         return new TotalResult(total, NextStatusOf(request.Status, total));
     }
 
@@ -74,7 +75,8 @@ public static class DocumentTotalCalculator
         return couponCode switch
         {
             PricingRules.SaleCoupon => amount * PricingRules.CouponSaleRate,
-            PricingRules.FixedCoupon when amount > PricingRules.CouponFixedFrom => PricingRules.CouponFixed,
+            PricingRules.FixedCoupon when amount > PricingRules.CouponFixedFrom
+                => PricingRules.CouponFixed,
             _ => 0m,
         };
     }

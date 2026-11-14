@@ -16,15 +16,18 @@ public static class DocumentReport
         DocumentGuards.EnsureRequestValid(request);
         DocumentGuards.EnsureResultValid(result);
         StringBuilder text = new();
-        text.Append("Документ № ").Append(request.DocumentId.ToString(CultureInfo.InvariantCulture)).Append('\n');
+        text.Append("Документ № ")
+            .Append(request.DocumentId.ToString(CultureInfo.InvariantCulture)).Append('\n');
         text.Append("Одержувач: ").Append(request.Recipient.Name).Append('\n');
         text.Append("Пошта: ").Append(request.Recipient.Email).Append('\n');
         foreach (TransferLine line in request.Lines)
         {
-            text.Append(line.Sku).Append(" x ").Append(line.Quantity.ToString(CultureInfo.InvariantCulture)).Append('\n');
+            text.Append(line.Sku).Append(" x ")
+                .Append(line.Quantity.ToString(CultureInfo.InvariantCulture)).Append('\n');
         }
 
-        text.Append("Разом: ").Append(result.Total.ToString("F2", CultureInfo.InvariantCulture)).Append('\n');
+        text.Append("Разом: ")
+            .Append(result.Total.ToString("F2", CultureInfo.InvariantCulture)).Append('\n');
         text.Append("Стан: ").Append(result.NewStatus).Append('\n');
         return text.ToString();
     }

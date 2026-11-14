@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6d3d0917-7fb1-4d6c-8dd3-392385bfa964" name="Макс@DESKTOP-5679RHT 2026-11-14 19:11:27" runUser="DESKTOP-5679RHT\CodexSandboxOnline" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-14T19:11:27.8295279+02:00" queuing="2026-11-14T19:11:27.8295282+02:00" start="2026-11-14T19:11:26.3285422+02:00" finish="2026-11-14T19:11:27.8343872+02:00" />
+  <TestSettings name="default" id="f34f6a80-523c-47c7-87e1-b5f85d63059a">
+    <Deployment runDeploymentRoot="Макс_DESKTOP-5679RHT_2026-11-14_19_11_27" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="350cc58c-a83f-4972-9dd2-c75176505f29" testId="005cdcfe-1fa1-2331-2652-a5482e45b10b" testName="WarehouseStock.Tests.LegacyProcessorTests.SmallTransferAddsDelivery" computerName="DESKTOP-5679RHT" duration="00:00:00.0001349" startTime="2026-11-14T19:11:27.7365980+02:00" endTime="2026-11-14T19:11:27.7365980+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="350cc58c-a83f-4972-9dd2-c75176505f29" />
+    <UnitTestResult executionId="fdfa908c-07a1-424d-88b8-b6a3ef89f2ca" testId="9c7f0a89-e638-870c-8d11-31ecbb3dc8dc" testName="WarehouseStock.Tests.LegacyProcessorTests.RegularRecipientReturns129270" computerName="DESKTOP-5679RHT" duration="00:00:00.0005985" startTime="2026-11-14T19:11:27.7363804+02:00" endTime="2026-11-14T19:11:27.7363804+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fdfa908c-07a1-424d-88b8-b6a3ef89f2ca" />
+    <UnitTestResult executionId="b28edf57-2ebe-4d4a-a5da-4cbc0798c078" testId="908645a8-d079-9024-0bab-5e1d746bb488" testName="WarehouseStock.Tests.LegacyProcessorTests.NoLinesReturnsMinusOne" computerName="DESKTOP-5679RHT" duration="00:00:00.1199983" startTime="2026-11-14T19:11:27.7344479+02:00" endTime="2026-11-14T19:11:27.7344585+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b28edf57-2ebe-4d4a-a5da-4cbc0798c078" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="WarehouseStock.Tests.LegacyProcessorTests.RegularRecipientReturns129270" storage="c:\users\макс\documents\codex\2026-11-10\new-chat\outputs\construction_lab3\warehousestock\tests\warehousestock.tests\bin\debug\net8.0\warehousestock.tests.dll" id="9c7f0a89-e638-870c-8d11-31ecbb3dc8dc">
+      <Execution id="fdfa908c-07a1-424d-88b8-b6a3ef89f2ca" />
+      <TestMethod codeBase="[REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="WarehouseStock.Tests.LegacyProcessorTests" name="RegularRecipientReturns129270" />
+    </UnitTest>
+    <UnitTest name="WarehouseStock.Tests.LegacyProcessorTests.SmallTransferAddsDelivery" storage="c:\users\макс\documents\codex\2026-11-10\new-chat\outputs\construction_lab3\warehousestock\tests\warehousestock.tests\bin\debug\net8.0\warehousestock.tests.dll" id="005cdcfe-1fa1-2331-2652-a5482e45b10b">
+      <Execution id="350cc58c-a83f-4972-9dd2-c75176505f29" />
+      <TestMethod codeBase="[REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="WarehouseStock.Tests.LegacyProcessorTests" name="SmallTransferAddsDelivery" />
+    </UnitTest>
+    <UnitTest name="WarehouseStock.Tests.LegacyProcessorTests.NoLinesReturnsMinusOne" storage="c:\users\макс\documents\codex\2026-11-10\new-chat\outputs\construction_lab3\warehousestock\tests\warehousestock.tests\bin\debug\net8.0\warehousestock.tests.dll" id="908645a8-d079-9024-0bab-5e1d746bb488">
+      <Execution id="b28edf57-2ebe-4d4a-a5da-4cbc0798c078" />
+      <TestMethod codeBase="[REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="WarehouseStock.Tests.LegacyProcessorTests" name="NoLinesReturnsMinusOne" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="005cdcfe-1fa1-2331-2652-a5482e45b10b" executionId="350cc58c-a83f-4972-9dd2-c75176505f29" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9c7f0a89-e638-870c-8d11-31ecbb3dc8dc" executionId="fdfa908c-07a1-424d-88b8-b6a3ef89f2ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="908645a8-d079-9024-0bab-5e1d746bb488" executionId="b28edf57-2ebe-4d4a-a5da-4cbc0798c078" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Список результатов" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Все загруженные результаты" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.38]   Discovering: WarehouseStock.Tests&#xD;
+[xUnit.net 00:00:00.42]   Discovered:  WarehouseStock.Tests&#xD;
+[xUnit.net 00:00:00.42]   Starting:    WarehouseStock.Tests&#xD;
+�������: ����� �����?�&#xD;
+[xUnit.net 00:00:00.58]   Finished:    WarehouseStock.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
