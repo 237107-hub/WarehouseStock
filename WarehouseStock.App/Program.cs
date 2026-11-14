@@ -1,4 +1,5 @@
-using System.Globalization;
+using System.Text;
+using WarehouseStock.Core.Reporting;
 using WarehouseStock.Core.Documents;
 
 TotalRequest request = new()
@@ -12,5 +13,7 @@ TotalRequest request = new()
     DeliveryPrice = 60m,
 };
 TotalResult result = DocumentTotalCalculator.Calculate(request);
-Console.WriteLine(result.Total.ToString("F2", CultureInfo.InvariantCulture));
-Console.WriteLine(result.NewStatus);
+string text = DocumentReport.TextOf(request, result);
+Console.OutputEncoding = Encoding.UTF8;
+DocumentReportPrinter printer = new(Console.Out);
+printer.Print(text);

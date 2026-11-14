@@ -65,4 +65,13 @@ internal static class DocumentGuards
         EnsureStatusValid(request.Status);
         ArgumentOutOfRangeException.ThrowIfNegative(request.DeliveryPrice, nameof(request.DeliveryPrice));
     }
+
+    /// <summary>Перевіряє результат перед формуванням звіту.</summary>
+    /// <param name="result">Невід’ємний підсумок із допустимим станом.</param>
+    public static void EnsureResultValid(TotalResult result)
+    {
+        ArgumentNullException.ThrowIfNull(result);
+        ArgumentOutOfRangeException.ThrowIfNegative(result.Total, nameof(result.Total));
+        EnsureStatusValid(result.NewStatus);
+    }
 }
