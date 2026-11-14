@@ -58,3 +58,25 @@ dotnet_naming_rule.interfaces_rule.severity = warning
 dotnet_naming_symbols.interfaces.applicable_kinds = interface
 dotnet_naming_style.interface_style.required_prefix = I
 dotnet_naming_style.interface_style.capitalization = pascal_case
+
+# Навчальний проєкт не потребує ліцензійного заголовка в кожному файлі.
+dotnet_diagnostic.SA1633.severity = none
+
+# Звертання до членів без this. відповідає стандарту проєкту.
+dotnet_diagnostic.SA1101.severity = none
+
+# Приватні поля мають префікс _, закріплений правилами іменування.
+dotnet_diagnostic.SA1309.severity = none
+
+# Повну XML-документацію запроваджуємо з лабораторної роботи №4.
+dotnet_diagnostic.SA0001.severity = none
+dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1601.severity = none
+dotnet_diagnostic.SA1602.severity = none
+
+# Перевірки оформлення залишаємо активними.
+dotnet_diagnostic.SA1028.severity = warning
+dotnet_diagnostic.SA1201.severity = warning
+dotnet_diagnostic.SA1503.severity = warning
+dotnet_diagnostic.SA1516.severity = warning
+dotnet_diagnostic.IDE0055.severity = warning
