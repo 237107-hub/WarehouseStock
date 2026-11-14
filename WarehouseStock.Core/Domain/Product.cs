@@ -1,4 +1,4 @@
-﻿namespace WarehouseStock.Core.Domain;
+namespace WarehouseStock.Core.Domain;
 
 /// <summary>Товар складського обліку.</summary>
 public sealed class Product

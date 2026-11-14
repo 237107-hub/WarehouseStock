@@ -1,4 +1,4 @@
-﻿namespace WarehouseStock.Core.Domain;
+namespace WarehouseStock.Core.Domain;
 
 /// <summary>Позиція документа переміщення товару.</summary>
 public sealed class TransferLine

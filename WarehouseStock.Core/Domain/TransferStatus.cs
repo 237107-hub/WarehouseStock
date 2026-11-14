@@ -1,4 +1,4 @@
-﻿namespace WarehouseStock.Core.Domain;
+namespace WarehouseStock.Core.Domain;
 
 /// <summary>Стан документа переміщення.</summary>
 public enum TransferStatus

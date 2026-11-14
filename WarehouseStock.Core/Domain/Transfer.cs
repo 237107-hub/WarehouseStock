@@ -1,4 +1,4 @@
-﻿namespace WarehouseStock.Core.Domain;
+namespace WarehouseStock.Core.Domain;
 
 /// <summary>Переміщення товарів між складами.</summary>
 public sealed class Transfer
