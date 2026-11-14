@@ -1,12 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace WarehouseStock.Core.Legacy;
 
 /// <summary>Успадкований документ переміщення з розрахунком вартості.</summary>
 public class StockTransfer
 {
+    /// <summary>Ставка ПДВ; масштаб decimal збережено як в успадкованому коді.</summary>
+    private const decimal VatRate = 0.2m;
+
+    /// <summary>Виключний поріг регулярної знижки.</summary>
+    private const decimal RegularDiscountThreshold = 1000m;
+
+    /// <summary>Частка регулярної знижки.</summary>
+    private const decimal RegularDiscountRate = 0.10m;
+
+    /// <summary>Виключний поріг знижки на велике переміщення.</summary>
+    private const decimal LargeTransferThreshold = 5000m;
+
+    /// <summary>Частка знижки на велике переміщення.</summary>
+    private const decimal LargeTransferDiscountRate = 0.15m;
+
+    /// <summary>Виключний поріг кількості рядків для гуртової знижки.</summary>
+    private const int BulkLineCount = 10;
+
+    /// <summary>Сума гуртової знижки.</summary>
+    private const decimal BulkDiscountAmount = 100m;
+
+    /// <summary>Виключна верхня межа кількості позицій.</summary>
+    private const int MaxLineCount = 100;
+
+    /// <summary>Мінімальна допустима довжина назви одержувача.</summary>
+    private const int MinRecipientNameLength = 3;
+
+    /// <summary>Кількість десяткових знаків для округлення підсумку.</summary>
+    private const int AmountDecimalPlaces = 2;
+
+    /// <summary>Код нового документа; також стандартне значення int.</summary>
+    private const int StatusNew = 0;
+
+    /// <summary>Код погодженого документа.</summary>
+    private const int StatusApproved = 1;
+
+    /// <summary>Код відправленого документа.</summary>
+    private const int StatusDispatched = 2;
+
+    /// <summary>Код скасованого документа.</summary>
+    private const int StatusCancelled = 3;
+
     private readonly List<string[]> _lines = new List<string[]>();
 
     /// <summary>Створює документ для зазначеного одержувача.</summary>
@@ -26,7 +64,7 @@ public class StockTransfer
     public string RecipientName { get; private set; }
 
     /// <summary>Стан: 0 — новий, 1 — погоджений, 2 — відправлений, 3 — скасований.</summary>
-    public int Status { get; private set; } = 0;
+    public int Status { get; private set; }
 
     /// <summary>Локальний час створення документа.</summary>
     public DateTime CreatedAt { get; private set; }
@@ -78,22 +116,18 @@ public class StockTransfer
         }
 
         // Порядок знижок успадковано; пільги не підсумовуються.
-        if (isRegularRecipient == true && total > 1000)
+        if (isRegularRecipient == true && total > RegularDiscountThreshold)
         {
-            total = total * 0.9m;
+            total *= 1m - RegularDiscountRate;
         }
-        else if (total > 5000)
+        else if (total > LargeTransferThreshold)
         {
-            total = total * 0.85m;
-        }
-        else
-        {
-            total = total;
+            total *= 1m - LargeTransferDiscountRate;
         }
 
-        if (lineCount > 10)
+        if (lineCount > BulkLineCount)
         {
-            total = total - 100;
+            total -= BulkDiscountAmount;
         }
 
         if (total < 0)
@@ -102,8 +136,8 @@ public class StockTransfer
         }
 
         // ПДВ нараховується після всіх знижок.
-        total = total + (total * 0.2m);
-        return Math.Round(total, 2);
+        total += total * VatRate;
+        return Math.Round(total, AmountDecimalPlaces);
     }
 
     /// <summary>Змінює стан лише для дозволеного успадкованого переходу.</summary>
@@ -112,21 +146,21 @@ public class StockTransfer
     /// У разі false поточний стан не змінюється.</returns>
     public bool TryChangeStatus(int newStatus)
     {
-        if (Status == 0 && newStatus == 1)
+        if (Status == StatusNew && newStatus == StatusApproved)
         {
-            Status = 1;
+            Status = StatusApproved;
             return true;
         }
 
-        if (Status == 1 && newStatus == 2)
+        if (Status == StatusApproved && newStatus == StatusDispatched)
         {
-            Status = 2;
+            Status = StatusDispatched;
             return true;
         }
 
-        if (Status == 0 && newStatus == 3)
+        if (Status == StatusNew && newStatus == StatusCancelled)
         {
-            Status = 3;
+            Status = StatusCancelled;
             return true;
         }
 
@@ -140,11 +174,11 @@ public class StockTransfer
         if (Id != null
             && Id != string.Empty
             && RecipientName != null
-            && RecipientName.Length > 2
+            && RecipientName.Length >= MinRecipientNameLength
             && _lines.Count > 0
-            && _lines.Count < 100
-            && Status >= 0
-            && Status <= 3)
+            && _lines.Count < MaxLineCount
+            && Status >= StatusNew
+            && Status <= StatusCancelled)
         {
             return true;
         }
