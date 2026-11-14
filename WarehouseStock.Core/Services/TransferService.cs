@@ -1,5 +1,6 @@
 using WarehouseStock.Core.Abstractions;
 using WarehouseStock.Core.Domain;
+using WarehouseStock.Core.Errors;
 
 namespace WarehouseStock.Core.Services;
 
@@ -46,5 +47,32 @@ public sealed class TransferService
         }
 
         return total;
+    }
+
+    /// <summary>Завантажує обов’язковий документ замість поширення null.</summary>
+    /// <param name="transferId">Додатний номер переміщення.</param>
+    /// <returns>Знайдений документ або виняток transfer.exists.</returns>
+    public Transfer Load(int transferId)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(transferId);
+        return _repository.GetById(transferId) ?? throw new DomainRuleException(
+            "transfer.exists", $"Переміщення {transferId} не знайдено.");
+    }
+
+    /// <summary>Приймає позицію, вже перевірену барикадою.</summary>
+    /// <param name="transferId">Номер документа для редагування.</param>
+    /// <param name="line">Типізована позиція без рядкового розбору.</param>
+    public void AddLine(int transferId, TransferLine line)
+    {
+        ArgumentNullException.ThrowIfNull(line);
+        Transfer transfer = Load(transferId);
+        if (transfer.Status != TransferStatus.New)
+        {
+            throw new DomainRuleException(
+                "transfer.editable",
+                $"Переміщення {transferId} у стані {transfer.Status} редагувати не можна.");
+        }
+
+        transfer.AddLine(line);
     }
 }
