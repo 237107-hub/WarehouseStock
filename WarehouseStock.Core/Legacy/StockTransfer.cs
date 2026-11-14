@@ -4,31 +4,38 @@ using System.Linq;
 
 namespace WarehouseStock.Core.Legacy;
 
-// клас
+/// <summary>Успадкований документ переміщення з розрахунком вартості.</summary>
 public class StockTransfer
 {
     private readonly List<string[]> _lines = new List<string[]>();
 
-    // public string prim; // примітка, поки не треба
-
-    // конструктор
+    /// <summary>Створює документ для зазначеного одержувача.</summary>
+    /// <param name="id">Ідентифікатор документа.</param>
+    /// <param name="recipientName">Назва одержувача товарів.</param>
     public StockTransfer(string id, string recipientName)
     {
-        Id = id; // ставимо id
-        RecipientName = recipientName; // ставимо cl
-        CreatedAt = DateTime.Now; // ставимо дату
+        Id = id;
+        RecipientName = recipientName;
+        CreatedAt = DateTime.Now;
     }
 
+    /// <summary>Ідентифікатор документа.</summary>
     public string Id { get; private set; }
 
+    /// <summary>Назва одержувача товарів.</summary>
     public string RecipientName { get; private set; }
 
-    public int Status { get; private set; } = 0; // 0-новий,1-погоджений,2-відправлений,3-скасований
+    /// <summary>Стан: 0 — новий, 1 — погоджений, 2 — відправлений, 3 — скасований.</summary>
+    public int Status { get; private set; } = 0;
 
+    /// <summary>Локальний час створення документа.</summary>
     public DateTime CreatedAt { get; private set; }
 
-    // пошук
-    public static StockTransfer FindById(List<StockTransfer> transfers, string transferId)
+    /// <summary>Знаходить перший документ із заданим ідентифікатором.</summary>
+    /// <param name="transfers">Список документів для пошуку.</param>
+    /// <param name="transferId">Ідентифікатор потрібного документа.</param>
+    /// <returns>Знайдений документ або null, якщо збігів немає.</returns>
+    public static StockTransfer? FindById(List<StockTransfer> transfers, string transferId)
     {
         for (int i = 0; i < transfers.Count; i++)
         {
@@ -41,17 +48,22 @@ public class StockTransfer
         return null;
     }
 
-    // метод додавання
+    /// <summary>Додає позицію товару до документа.</summary>
+    /// <param name="sku">Артикул товару.</param>
+    /// <param name="quantity">Кількість одиниць товару.</param>
+    /// <param name="unitPrice">Облікова ціна одиниці товару.</param>
     public void AddLine(string sku, int quantity, decimal unitPrice)
     {
         string[] line = new string[3];
         line[0] = sku;
         line[1] = quantity.ToString();
         line[2] = unitPrice.ToString();
-        _lines.Add(line); // додаємо t у ln
+        _lines.Add(line);
     }
 
-    // ProcessData
+    /// <summary>Обчислює суму з успадкованими знижками та ПДВ.</summary>
+    /// <param name="isRegularRecipient">Ознака одержувача з регулярною знижкою.</param>
+    /// <returns>Сума після знижок і ПДВ, округлена до двох десяткових знаків.</returns>
     public decimal CalculateTotal(bool isRegularRecipient)
     {
         decimal total = 0;
@@ -61,11 +73,11 @@ public class StockTransfer
         {
             int quantity = int.Parse(_lines[i][1]);
             decimal unitPrice = decimal.Parse(_lines[i][2]);
-            total = total + (quantity * unitPrice); // додаємо до суми
-            lineCount = lineCount + 1; // збільшуємо kolvo на одиницю
+            total = total + (quantity * unitPrice);
+            lineCount = lineCount + 1;
         }
 
-        // if (sum1 > 500) { sum1 = sum1 - 50; } // стара знижка
+        // Порядок знижок успадковано; пільги не підсумовуються.
         if (isRegularRecipient == true && total > 1000)
         {
             total = total * 0.9m;
@@ -89,11 +101,15 @@ public class StockTransfer
             total = 0;
         }
 
+        // ПДВ нараховується після всіх знижок.
         total = total + (total * 0.2m);
-        return Math.Round(total, 2); // повертаємо sum1
+        return Math.Round(total, 2);
     }
 
-    // міняємо статус
+    /// <summary>Змінює стан лише для дозволеного успадкованого переходу.</summary>
+    /// <param name="newStatus">Код цільового стану.</param>
+    /// <returns>True, якщо перехід виконано; false — якщо заборонено.
+    /// У разі false поточний стан не змінюється.</returns>
     public bool TryChangeStatus(int newStatus)
     {
         if (Status == 0 && newStatus == 1)
@@ -114,10 +130,11 @@ public class StockTransfer
             return true;
         }
 
-        return false; // не можна
+        return false;
     }
 
-    // перевірка
+    /// <summary>Перевіряє документ за успадкованими критеріями коректності.</summary>
+    /// <returns>True, якщо всі критерії виконано; інакше false.</returns>
     public bool IsValid()
     {
         if (Id != null
@@ -137,7 +154,8 @@ public class StockTransfer
         }
     }
 
-    // звіт
+    /// <summary>Формує текстовий звіт із позиціями та загальною сумою.</summary>
+    /// <returns>Звіт із підсумком без регулярної знижки.</returns>
     public string BuildReport()
     {
         string report = string.Empty;
@@ -153,8 +171,6 @@ public class StockTransfer
         }
 
         report = report + "Разом: " + CalculateTotal(false) + "\n";
-        return report; // повертаємо s
+        return report;
     }
-
-
 }

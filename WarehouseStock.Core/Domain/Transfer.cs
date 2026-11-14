@@ -5,16 +5,22 @@ public sealed class Transfer
 {
     private readonly List<TransferLine> _lines = new();
 
+    /// <summary>Ідентифікатор документа переміщення.</summary>
     public int Id { get; init; }
 
+    /// <summary>Ідентифікатор складу відправлення.</summary>
     public int SourceWarehouseId { get; init; }
 
+    /// <summary>Ідентифікатор складу призначення.</summary>
     public int DestinationWarehouseId { get; init; }
 
+    /// <summary>Поточний стан переміщення.</summary>
     public TransferStatus Status { get; set; } = TransferStatus.New;
 
+    /// <summary>Час створення документа з часовим зміщенням.</summary>
     public DateTimeOffset CreatedAt { get; init; }
 
+    /// <summary>Позиції документа через інтерфейс читання.</summary>
     public IReadOnlyList<TransferLine> Lines => _lines;
 
     /// <summary>Додає позицію до документа.</summary>

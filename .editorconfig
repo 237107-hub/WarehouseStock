@@ -80,3 +80,12 @@ dotnet_diagnostic.SA1201.severity = warning
 dotnet_diagnostic.SA1503.severity = warning
 dotnet_diagnostic.SA1516.severity = warning
 dotnet_diagnostic.IDE0055.severity = warning
+
+# З ЛР2 XML-документація публічних членів є обов'язковою.
+dotnet_diagnostic.SA1600.severity = warning
+dotnet_diagnostic.SA1601.severity = warning
+dotnet_diagnostic.SA1602.severity = warning
+
+# Документація українською: не вимагаємо англійських шаблонних фраз.
+dotnet_diagnostic.SA1623.severity = none
+dotnet_diagnostic.SA1642.severity = none
