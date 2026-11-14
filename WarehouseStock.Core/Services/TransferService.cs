@@ -75,4 +75,59 @@ public sealed class TransferService
 
         transfer.AddLine(line);
     }
+
+    /// <summary>Погоджує документ, якщо ліміт покриває облікову вартість.</summary>
+    /// <param name="transferId">Номер нового переміщення.</param>
+    /// <param name="allowedValue">Невід’ємний погоджений ліміт.</param>
+    public void Approve(int transferId, decimal allowedValue)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(allowedValue);
+        Transfer transfer = Load(transferId);
+        EnsureApprovable(transfer);
+        decimal required = TotalOf(transfer);
+        EnsureLimit(transferId, allowedValue, required);
+        transfer.Approve();
+    }
+
+    /// <summary>Скасовує документ з поясненою причиною.</summary>
+    /// <param name="transferId">Номер документа.</param>
+    /// <param name="reason">Непорожня причина скасування.</param>
+    public void Cancel(int transferId, string reason)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(reason);
+        Transfer transfer = Load(transferId);
+        if (transfer.Status is not (TransferStatus.New or TransferStatus.Approved))
+        {
+            throw new DomainRuleException(
+                "transfer.cancellable",
+                $"Переміщення {transferId} у стані {transfer.Status} скасувати не можна.");
+        }
+
+        transfer.Cancel();
+    }
+
+    private static void EnsureApprovable(Transfer transfer)
+    {
+        if (transfer.Status != TransferStatus.New)
+        {
+            throw new DomainRuleException(
+                "transfer.approvable",
+                $"Стан {transfer.Status} переміщення {transfer.Id} не дозволяє погодження.");
+        }
+
+        if (transfer.Lines.Count == 0)
+        {
+            throw new DomainRuleException("transfer.lines", $"Переміщення {transfer.Id} порожнє.");
+        }
+    }
+
+    private static void EnsureLimit(int transferId, decimal allowedValue, decimal required)
+    {
+        if (allowedValue < required)
+        {
+            throw new DomainRuleException(
+                "transfer.amount",
+                $"Переміщення {transferId}: дозволено {allowedValue}, потрібно {required}.");
+        }
+    }
 }
