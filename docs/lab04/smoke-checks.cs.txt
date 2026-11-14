@@ -1,0 +1,73 @@
+using WarehouseStock.Core.Domain;
+using WarehouseStock.Core.Notifications;
+using WarehouseStock.Core.Pricing;
+using WarehouseStock.Core.Services;
+using WarehouseStock.Core.Storage;
+using WarehouseStock.Core.Reporting;
+using WarehouseStock.Tests.Legacy;
+
+try
+{
+    int count = 0;
+    void Check(bool condition, string name)
+    {
+        if (!condition) throw new InvalidOperationException(name);
+        count++;
+        Console.WriteLine("OK " + name);
+    }
+    void Throws<T>(Action action, string name) where T : Exception
+    {
+        try { action(); } catch (T) { Check(true, name); return; }
+        throw new InvalidOperationException("Expected " + typeof(T).Name + ": " + name);
+    }
+    var date = new DateOnly(2026, 11, 14);
+    var transfer = new Transfer(1, 10, 20, date);
+    Throws<InvalidOperationException>(() => transfer.Approve(), "empty approval rejected");
+    transfer.AddLine(new TransferLine("A", 2, 250m));
+    Check(transfer.Lines is not List<TransferLine>, "raw List is not exposed");
+    Throws<NotSupportedException>(() => ((ICollection<TransferLine>)transfer.Lines).Add(new TransferLine("B", 1, 1m)), "collection cast cannot bypass AddLine");
+    Throws<InvalidOperationException>(() => new ArchivedTransfer(transfer, date), "open document cannot be archived");
+    transfer.Approve();
+    transfer.Dispatch();
+    Throws<InvalidOperationException>(() => transfer.Cancel(), "in-transit cancellation rejected");
+    transfer.Complete();
+    var archive = new ArchivedTransfer(transfer, date);
+    Throws<InvalidOperationException>(() => transfer.Cancel(), "terminal document cannot change via external alias");
+    Throws<InvalidOperationException>(() => transfer.AddLine(new TransferLine("B", 1, 1m)), "archived content cannot change through original document");
+    Check(archive.Lines.Count == 1 && archive.Status == TransferStatus.Completed, "archive content remains stable");
+    Check(typeof(ArchivedTransfer).GetMethod("AddLine") == null && !typeof(ArchivedTransfer).IsSubclassOf(typeof(Transfer)), "archive composition has no mutator or inheritance");
+    Throws<ArgumentOutOfRangeException>(() => new ArchivedTransfer(transfer, date.AddDays(-1)), "archive date precedes creation");
+    Throws<ArgumentException>(() => new Transfer(1, 10, 10, date), "same source and destination rejected");
+    Throws<ArgumentException>(() => new Warehouse(1, "W", "invalid"), "warehouse email checked at construction");
+    var product = new Product("A", "Item", 250m, 3);
+    product.Receive(2);
+    product.Dispatch(4);
+    Check(product.Stock == 1, "controlled stock operations preserve balance");
+    Throws<InvalidOperationException>(() => product.Dispatch(2), "insufficient stock rejected");
+    Check(product.Stock == 1, "failed dispatch leaves stock unchanged");
+    var repository = new InMemoryTransferRepository();
+    repository.Add(transfer);
+    Throws<InvalidOperationException>(() => repository.Add(transfer), "duplicate document id rejected");
+    var snapshot = (Transfer[])repository.GetAll();
+    snapshot[0] = new Transfer(99, 10, 20, date);
+    Check(repository.GetById(1) == transfer && repository.GetById(99) == null, "repository list is independent from dictionary");
+    Throws<ArgumentOutOfRangeException>(() => new DiscountPricingPolicy(-0.01m), "negative discount rejected");
+    Throws<ArgumentOutOfRangeException>(() => new DiscountPricingPolicy(0.51m), "excessive discount rejected");
+    var notifier = new TextWriterNotifier(TextWriter.Null);
+    Throws<ArgumentNullException>(() => new TransferService(null!, new RegularPricingPolicy(), notifier), "null repository rejected");
+    Throws<ArgumentNullException>(() => new TransferService(repository, null!, notifier), "null policy rejected");
+    Throws<ArgumentNullException>(() => new TransferService(repository, new RegularPricingPolicy(), null!), "null notifier rejected");
+    var line = new TransferLine("A", 2, 250m);
+    Check(new RegularPricingPolicy().PriceOf(line) == 500m && new DiscountPricingPolicy(0.05m).PriceOf(line) == 475m && new VipPricingPolicy().PriceOf(line) == 450m, "all policy implementations respect their contract");
+    var legacy = new LegacyTransfer { Id = 7 };
+    legacy.AddLine(new LegacyLine { Sku = "A", Quantity = 1, UnitPrice = 1m });
+    Throws<NotSupportedException>(() => new TransferManager().Archive(legacy), "legacy LSP failure reproduced before any file write");
+    var csv = TransferCsvReport.BuildCsv(new[] { new TransferReportRow(1, 475m, TransferStatus.Completed) });
+    Check(csv == "id;total;status\n1;475.00;Completed\n", "pure CSV exact output");
+    Console.WriteLine($"Smoke verification: {count} checks passed; no files or SMTP operations.");
+}
+catch (Exception exception)
+{
+    Console.Error.WriteLine(exception);
+    Environment.ExitCode = 1;
+}

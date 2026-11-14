@@ -1,0 +1,11 @@
+$ dotnet test --no-restore --filter FullyQualifiedName~DomainInvariantTests --logger trx;LogFileName=lab4.trx --results-directory docs/lab04/test-results --verbosity minimal
+  WarehouseStock.Core -> [REPOSITORY]\WarehouseStock.Core\bin\Debug\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.Tests -> [REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll
+Test run for [REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Results File: [REPOSITORY]\docs\lab04\test-results\lab4.trx
+
+Passed!  - Failed:     0, Passed:     3, Skipped:     0, Total:     3, Duration: 75 ms - WarehouseStock.Tests.dll (net8.0)

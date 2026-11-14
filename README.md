@@ -1,57 +1,66 @@
-# WarehouseStock
+# WarehouseStock — лабораторна робота 4
 
-Лабораторна робота 3 — декомпозиція підпрограм та захисне програмування.
+Конструювання класів: інкапсуляція та SOLID.
 Здравков Максим Юрійович, група 471, варіант 6.
-Навчальний розрахунок облікової вартості переміщення товарів між складами.
 
-## Відкриття
+## Запуск
 
-Розпакувати ВЕСЬ архів до звичайної папки. Відкрити WarehouseStock.sln,
-а не файл усередині ZIP. У Visual Studio стартовим призначити WarehouseStock.App.
-Потрібні .NET SDK 8+ із середовищем .NET 8 та доступ до NuGet при першому restore.
-Перевірено SDK 9.0.318. xUnit 2.9.2; Microsoft.NET.Test.Sdk 17.12.0.
+Розпакуйте весь ZIP. Для готової демонстрації відкрийте Запустить.cmd у корені
+архіву (потрібне середовище .NET 8 для Windows x64). Для редагування відкрийте
+WarehouseStock.sln у Visual Studio; стартовий проєкт — WarehouseStock.App.
+Бібліотеку WarehouseStock.Core запускати безпосередньо не можна.
 
 ```powershell
 dotnet restore
 dotnet build -c Release
 dotnet test -c Release
 dotnet run --project WarehouseStock.App -c Release
+dotnet run --project WarehouseStock.App -c Release -- vip
 ```
 
-Демонстрація: 2 × 200 = 400; SALE10 → 360; доставка 60 → 420.00;
-Approved → Dispatched. Програма друкує документ українською.
-Для власного документа змініть init-властивості request у Program.cs.
-Calculate не друкує; TextOf формує текст; Print записує до TextWriter.
-Для збереження звіту замість Console.Out можна передати StreamWriter.
+Потрібен .NET SDK 8+ з підтримкою net8.0 і NuGet при першому restore.
+Перевірено SDK 9.0.318. xUnit 2.9.2, Microsoft.NET.Test.Sdk 17.12.0.
+Без аргументу обирається regular: 2 × 250 зі знижкою 5% = 475.00.
+Режими vip / staff / standard дають 450.00 / 350.00 / 500.00.
+Невідомий ключ політики обирає standard. Усі залежності складає Program.cs.
 
-## Склад
+## Модель
 
-- Core/Documents — guards, enum, DTO, 14 констант, 7 правил і Calculate.
-- Core/Reporting — чиста побудова тексту й окрема команда друку.
-- Core/Domain — базові сутності попередніх лабораторних.
-- tests/WarehouseStock.Tests — 38 тестів, зокрема 200 порівнянь з еталоном.
-- docs/lab03 — фактичні метрики, обґрунтування й журнали виконання.
-- docs/lab02 — історичні матеріали другої роботи.
+- Domain/TransferLine та Warehouse — sealed record, get-only, перевірки в ctor.
+- Domain/Transfer — приватний List, захищене ReadOnlyCollection-подання,
+  private set стану, AddLine / Approve / Dispatch / Complete / Cancel.
+- Domain/Product — get-only реквізити, Stock змінюється лише Receive / Dispatch.
+- Domain/ArchivedTransfer — композиція закритого Transfer без AddLine.
+- Abstractions — ITransferRepository (3 методи), IPricingPolicy (1), INotifier (1).
+- Storage — одна реалізація сховища в пам’яті на Dictionary.
+- Pricing — 3 взаємозамінні політики; Notifications — локальний TextWriter.
+- Reporting/TransferCsvReport — чисте формування CSV зі знімків значень.
 
-## Перевірки
+Документ не виконує автоматичне списання запасів двох складів: транзакції
+залишків поза обсягом роботи. Пошта перевіряється правилом @, SMTP немає.
+Архів дозволений тільки у Completed/Cancelled; інваріант стабільності не
+залежить від добросовісності зовнішнього власника посилання на документ.
+Новий модуль ЛР4 не заявляє числової сумісності з дефектним класом-Богом:
+його безіменне віднімання 50 не є частиною контракту нових політик.
+
+## Перевірки та історія
 
 ```powershell
 dotnet format --verify-no-changes
 dotnet build -c Release -t:Rebuild
-dotnet test -c Release --no-build
-git --no-pager log --oneline lab2..HEAD
+dotnet test -c Release --filter FullyQualifiedName~DomainInvariantTests
+dotnet test -c Release
+git --no-pager log --oneline lab3..HEAD
 ```
 
-Підсумок: 0 помилок і попереджень; 38/38 тестів. Максимум ЦС 4,
-3 параметри явно написаного методу, 17 фізичних рядків тіла.
-У Core немає Console. Контракти відхиляють некоректні аргументи винятками.
-Незмінні DTO не означають глибокої незмінності IReadOnlyList; не змінюйте
-список паралельно з обчисленням. Недільну дату передано явно.
+Рівно 3 нові тести ЛР4 у DomainInvariantTests; 38 регресійних тестів ЛР3
+збережено, у повному наборі 41. Додатково виконано 25 інтеграційних перевірок
+без файлових операцій та SMTP. Збірка — 0 помилок і попереджень.
+Еталон класу-Бога розміщено тільки в tests/WarehouseStock.Tests/Legacy;
+Core не містить Console чи небезпечних успадкованих реалізацій.
 
-Гілка lab03-subprograms. Теги lab1 та lab2 збережені; lab3 позначає фінал.
-LegacyReference існує тільки в тестах як зафіксований еталон для порівняння;
-його довгий метод не входить до метрик продуктивної бібліотеки.
-Віддалений origin не налаштований. Архів містить .git з усією історією;
-для здачі посилання завантажте репозиторій у власний GitHub/GitLab.
-Скріншоти термінала не створювалися: докази — оригінальні текстові журнали
-та результати запуску xUnit у docs/lab03/evidence.
+docs/model.md — початкова модель; docs/lab04 — аудит із рівно 5 рядками,
+порівняння, журнали і XML-результати перевірок. Історичні docs/lab02 та lab03
+залишені для попередніх станів. Гілка lab04-classes-solid; теги lab1–lab4.
+Віддалений origin не налаштовано, push не виконувався. .git входить до архіву;
+для здачі посилання потрібно опублікувати репозиторій у власному GitHub/GitLab.

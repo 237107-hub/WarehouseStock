@@ -1,0 +1,10 @@
+$ dotnet build --no-restore -v:minimal
+  WarehouseStock.Core -> [REPOSITORY]\WarehouseStock.Core\bin\Debug\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.Tests -> [REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll
+  WarehouseStock.App -> [REPOSITORY]\WarehouseStock.App\bin\Debug\net8.0\WarehouseStock.App.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.72

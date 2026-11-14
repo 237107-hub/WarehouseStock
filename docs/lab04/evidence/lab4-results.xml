@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e1f1b780-25fe-4b20-ad03-cc9a5e31230d" name="Макс@DESKTOP-5679RHT 2026-11-14 19:54:58" runUser="DESKTOP-5679RHT\CodexSandboxOffline" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-14T19:54:58.8270198+02:00" queuing="2026-11-14T19:54:58.8270200+02:00" start="2026-11-14T19:54:57.7454923+02:00" finish="2026-11-14T19:54:58.8304551+02:00" />
+  <TestSettings name="default" id="d86cb0b4-beaa-4d2b-b0ca-0b1bf5772f93">
+    <Deployment runDeploymentRoot="Макс_DESKTOP-5679RHT_2026-11-14_19_54_58" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="74cac6b1-e713-4a7d-a2c7-f30ea2d82209" testId="28f00275-51bb-000a-a151-ea05d06cbce5" testName="WarehouseStock.Tests.DomainInvariantTests.TransferLineWithZeroQuantityThrowsArgumentOutOfRangeException" computerName="DESKTOP-5679RHT" duration="00:00:00.0003143" startTime="2026-11-14T19:54:58.7383766+02:00" endTime="2026-11-14T19:54:58.7383767+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="74cac6b1-e713-4a7d-a2c7-f30ea2d82209" />
+    <UnitTestResult executionId="f91d5d59-cb4e-4e61-9b29-5ec68b178775" testId="5cfbed65-6026-efa7-9686-8a9ab98051b0" testName="WarehouseStock.Tests.DomainInvariantTests.TotalOfWithInjectedTenPercentDiscountReturns180" computerName="DESKTOP-5679RHT" duration="00:00:00.0733586" startTime="2026-11-14T19:54:58.7365527+02:00" endTime="2026-11-14T19:54:58.7365639+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f91d5d59-cb4e-4e61-9b29-5ec68b178775" />
+    <UnitTestResult executionId="434c7994-5da0-47ec-b0a5-33b252dda490" testId="c386427b-dc7e-8448-00bc-37bee2e0c98b" testName="WarehouseStock.Tests.DomainInvariantTests.TransferAfterApprovalRejectsNewLines" computerName="DESKTOP-5679RHT" duration="00:00:00.0003891" startTime="2026-11-14T19:54:58.7382011+02:00" endTime="2026-11-14T19:54:58.7382012+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="434c7994-5da0-47ec-b0a5-33b252dda490" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="WarehouseStock.Tests.DomainInvariantTests.TransferAfterApprovalRejectsNewLines" storage="c:\users\макс\documents\codex\2026-11-10\new-chat\outputs\construction_lab4\warehousestock\tests\warehousestock.tests\bin\debug\net8.0\warehousestock.tests.dll" id="c386427b-dc7e-8448-00bc-37bee2e0c98b">
+      <Execution id="434c7994-5da0-47ec-b0a5-33b252dda490" />
+      <TestMethod codeBase="[REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="WarehouseStock.Tests.DomainInvariantTests" name="TransferAfterApprovalRejectsNewLines" />
+    </UnitTest>
+    <UnitTest name="WarehouseStock.Tests.DomainInvariantTests.TransferLineWithZeroQuantityThrowsArgumentOutOfRangeException" storage="c:\users\макс\documents\codex\2026-11-10\new-chat\outputs\construction_lab4\warehousestock\tests\warehousestock.tests\bin\debug\net8.0\warehousestock.tests.dll" id="28f00275-51bb-000a-a151-ea05d06cbce5">
+      <Execution id="74cac6b1-e713-4a7d-a2c7-f30ea2d82209" />
+      <TestMethod codeBase="[REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="WarehouseStock.Tests.DomainInvariantTests" name="TransferLineWithZeroQuantityThrowsArgumentOutOfRangeException" />
+    </UnitTest>
+    <UnitTest name="WarehouseStock.Tests.DomainInvariantTests.TotalOfWithInjectedTenPercentDiscountReturns180" storage="c:\users\макс\documents\codex\2026-11-10\new-chat\outputs\construction_lab4\warehousestock\tests\warehousestock.tests\bin\debug\net8.0\warehousestock.tests.dll" id="5cfbed65-6026-efa7-9686-8a9ab98051b0">
+      <Execution id="f91d5d59-cb4e-4e61-9b29-5ec68b178775" />
+      <TestMethod codeBase="[REPOSITORY]\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="WarehouseStock.Tests.DomainInvariantTests" name="TotalOfWithInjectedTenPercentDiscountReturns180" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="28f00275-51bb-000a-a151-ea05d06cbce5" executionId="74cac6b1-e713-4a7d-a2c7-f30ea2d82209" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5cfbed65-6026-efa7-9686-8a9ab98051b0" executionId="f91d5d59-cb4e-4e61-9b29-5ec68b178775" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c386427b-dc7e-8448-00bc-37bee2e0c98b" executionId="434c7994-5da0-47ec-b0a5-33b252dda490" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:00.30]   Discovering: WarehouseStock.Tests&#xD;
+[xUnit.net 00:00:00.38]   Discovered:  WarehouseStock.Tests&#xD;
+[xUnit.net 00:00:00.38]   Starting:    WarehouseStock.Tests&#xD;
+[xUnit.net 00:00:00.49]   Finished:    WarehouseStock.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

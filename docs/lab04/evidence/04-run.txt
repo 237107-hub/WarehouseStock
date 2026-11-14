@@ -1,0 +1,7 @@
+$ dotnet run --project WarehouseStock.App --no-build --no-restore
+Зареєстровано переміщення № 1
+Маршрут: Центральний склад -> Західний склад
+Сума: 475.00
+Стан архіву: Completed
+id;total;status
+1;475.00;Completed

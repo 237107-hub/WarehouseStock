@@ -1,0 +1,27 @@
+$ dotnet run --project [VERIFICATION]\smoke\smoke.csproj -c Release --no-restore
+OK empty approval rejected
+OK raw List is not exposed
+OK collection cast cannot bypass AddLine
+OK open document cannot be archived
+OK in-transit cancellation rejected
+OK terminal document cannot change via external alias
+OK archived content cannot change through original document
+OK archive content remains stable
+OK archive composition has no mutator or inheritance
+OK archive date precedes creation
+OK same source and destination rejected
+OK warehouse email checked at construction
+OK controlled stock operations preserve balance
+OK insufficient stock rejected
+OK failed dispatch leaves stock unchanged
+OK duplicate document id rejected
+OK repository list is independent from dictionary
+OK negative discount rejected
+OK excessive discount rejected
+OK null repository rejected
+OK null policy rejected
+OK null notifier rejected
+OK all policy implementations respect their contract
+OK legacy LSP failure reproduced before any file write
+OK pure CSV exact output
+Smoke verification: 25 checks passed; no files or SMTP operations.
