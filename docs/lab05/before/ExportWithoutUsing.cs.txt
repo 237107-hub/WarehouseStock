@@ -1,0 +1,7 @@
+public void ExportReport(string path, Transfer transfer)
+{
+    var writer = new StreamWriter(path);
+    writer.WriteLine(transfer.Id);
+    writer.WriteLine(TotalOf(transfer)); // За винятку Close не виконається.
+    writer.Close();
+}

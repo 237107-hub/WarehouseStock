@@ -1,0 +1,43 @@
+// Навчальна до-версія; не компілюється як робочий API.
+public Transfer? Load(int transferId)
+{
+    try
+    {
+        return _repository.GetById(transferId);
+    }
+    catch (Exception)
+    {
+    }
+    return null;
+}
+
+public void Cancel(int transferId, string reason)
+{
+    try
+    {
+        var transfer = _repository.GetById(transferId);
+        transfer.Status = TransferStatus.Cancelled;
+    }
+    catch (Exception exception)
+    {
+        Console.WriteLine("Щось пішло не так");
+        throw exception;
+    }
+}
+
+public int CountValidQuantities(string[] rows)
+{
+    var valid = 0;
+    foreach (var row in rows)
+    {
+        try
+        {
+            var quantity = int.Parse(row);
+            if (quantity > 0) valid++;
+        }
+        catch (FormatException)
+        {
+        }
+    }
+    return valid;
+}
