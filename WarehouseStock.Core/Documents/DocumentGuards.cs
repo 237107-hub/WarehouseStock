@@ -43,4 +43,14 @@ internal static class DocumentGuards
             EnsureLineValid(line);
         }
     }
+
+    /// <summary>Відхиляє числові значення поза переліком станів.</summary>
+    /// <param name="status">Стан для перевірки.</param>
+    public static void EnsureStatusValid(DocumentStatus status)
+    {
+        if (!Enum.IsDefined(status))
+        {
+            throw new ArgumentOutOfRangeException(nameof(status), status, "Невідомий стан документа.");
+        }
+    }
 }
