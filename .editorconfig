@@ -93,9 +93,3 @@ dotnet_diagnostic.SA1201.severity = warning
 dotnet_diagnostic.SA1503.severity = warning
 dotnet_diagnostic.SA1516.severity = warning
 
-# Еталон методички збережено до декомпозиції; файл буде видалено в ЛР3.
-[WarehouseStock.Core/Legacy/LegacyProcessor.cs]
-dotnet_diagnostic.SA1503.severity = none
-dotnet_diagnostic.IDE0011.severity = none
-dotnet_diagnostic.SA1520.severity = none
-dotnet_diagnostic.SA1117.severity = none

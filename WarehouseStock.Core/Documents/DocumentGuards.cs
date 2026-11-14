@@ -53,4 +53,16 @@ internal static class DocumentGuards
             throw new ArgumentOutOfRangeException(nameof(status), status, "Невідомий стан документа.");
         }
     }
+
+    /// <summary>Перевіряє запит перед обчисленням.</summary>
+    /// <param name="request">Запит з усіма вхідними даними.</param>
+    public static void EnsureRequestValid(TotalRequest request)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(request.Recipient);
+        EnsureHeaderValid(request.DocumentId, request.Recipient.Name, request.Recipient.Email);
+        EnsureLinesValid(request.Lines);
+        EnsureStatusValid(request.Status);
+        ArgumentOutOfRangeException.ThrowIfNegative(request.DeliveryPrice, nameof(request.DeliveryPrice));
+    }
 }

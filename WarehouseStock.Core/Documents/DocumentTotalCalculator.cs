@@ -3,6 +3,22 @@ namespace WarehouseStock.Core.Documents;
 /// <summary>Чисті підпрограми розрахунку переміщення.</summary>
 public static class DocumentTotalCalculator
 {
+    /// <summary>Обчислює підсумок і новий стан без побічних ефектів.</summary>
+    /// <param name="request">Валідний запит на розрахунок переміщення.</param>
+    /// <returns>Незалежний об’єкт результату.</returns>
+    public static TotalResult Calculate(TotalRequest request)
+    {
+        DocumentGuards.EnsureRequestValid(request);
+        decimal total = SubtotalOf(request.Lines);
+        total -= ClientDiscountOf(total, request.Recipient.IsRegular);
+        total -= VolumeDiscountOf(total);
+        total -= CouponDiscountOf(total, request.CouponCode);
+        total -= WeekendDiscountOf(total, request.CreatedAt);
+        total += DeliveryFeeOf(total, request.DeliveryPrice);
+        total = request.Status == DocumentStatus.Cancelled ? 0m : Math.Round(Math.Max(total, 0m), 2);
+        return new TotalResult(total, NextStatusOf(request.Status, total));
+    }
+
     /// <summary>Сума позицій з гуртовою знижкою.</summary>
     /// <param name="lines">Позиції переміщення.</param>
     /// <returns>Обчислене значення правила.</returns>

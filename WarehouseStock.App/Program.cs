@@ -1,12 +1,16 @@
-using System.Text;
-using WarehouseStock.Core.Legacy;
+using System.Globalization;
+using WarehouseStock.Core.Documents;
 
-Console.OutputEncoding = Encoding.UTF8;
-StockTransfer transfer = new StockTransfer("A-1001", "Центральний склад");
-transfer.AddLine("SKU-1", 3, 250m);
-transfer.AddLine("SKU-2", 12, 90m);
-Console.WriteLine(transfer.CalculateTotal(false));
-Console.WriteLine(transfer.CalculateTotal(true));
-Console.WriteLine(transfer.IsValid());
-Console.WriteLine(transfer.TryChangeStatus(1));
-Console.Write(transfer.BuildReport());
+TotalRequest request = new()
+{
+    DocumentId = 2,
+    Recipient = new RecipientInfo("Західний склад", "west@example.com", false),
+    Lines = new[] { new TransferLine { Sku = "A1", Quantity = 2, UnitPrice = 200m } },
+    CreatedAt = new DateOnly(2026, 3, 10),
+    CouponCode = "SALE10",
+    Status = DocumentStatus.Approved,
+    DeliveryPrice = 60m,
+};
+TotalResult result = DocumentTotalCalculator.Calculate(request);
+Console.WriteLine(result.Total.ToString("F2", CultureInfo.InvariantCulture));
+Console.WriteLine(result.NewStatus);

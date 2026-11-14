@@ -1,14 +1,14 @@
 namespace WarehouseStock.Core.Documents;
 
 /// <summary>Позиція успадкованого розрахунку переміщення.</summary>
-public sealed class TransferLine
+public sealed record TransferLine
 {
     /// <summary>Артикул товару.</summary>
-    public string Sku { get; set; } = string.Empty;
+    public string Sku { get; init; } = string.Empty;
 
     /// <summary>Кількість одиниць товару.</summary>
-    public int Quantity { get; set; }
+    public int Quantity { get; init; }
 
     /// <summary>Облікова ціна одиниці товару.</summary>
-    public decimal UnitPrice { get; set; }
+    public decimal UnitPrice { get; init; }
 }

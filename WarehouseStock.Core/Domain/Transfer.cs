@@ -25,7 +25,14 @@ public sealed class Transfer
 
     /// <summary>Додає позицію до документа.</summary>
     /// <param name="line">Позиція товару для переміщення.</param>
-    public void AddLine(TransferLine line) => _lines.Add(line);
+    public void AddLine(TransferLine line)
+    {
+        ArgumentNullException.ThrowIfNull(line);
+        ArgumentException.ThrowIfNullOrWhiteSpace(line.Sku);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(line.Quantity, nameof(line.Quantity));
+        ArgumentOutOfRangeException.ThrowIfNegative(line.UnitPrice, nameof(line.UnitPrice));
+        _lines.Add(line);
+    }
 
     /// <summary>Обчислює загальну вартість переміщення.</summary>
     /// <returns>Сума вартостей усіх позицій документа.</returns>
