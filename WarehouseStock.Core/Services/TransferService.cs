@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Logging;
 using WarehouseStock.Core.Abstractions;
+using WarehouseStock.Core.Diagnostics;
 using WarehouseStock.Core.Domain;
 using WarehouseStock.Core.Errors;
 
@@ -10,16 +12,24 @@ public sealed class TransferService
     private readonly ITransferRepository _repository;
     private readonly IPricingPolicy _pricing;
     private readonly INotifier _notifier;
+    private readonly ILogger<TransferService> _log;
 
     /// <summary>Приймає всі зовнішні залежності як абстракції.</summary>
     /// <param name="repository">Сховище документів.</param>
     /// <param name="pricing">Стратегія облікової вартості.</param>
     /// <param name="notifier">Канал повідомлення про реєстрацію.</param>
-    public TransferService(ITransferRepository repository, IPricingPolicy pricing, INotifier notifier)
+    /// <param name="log">Структурований журнал операцій.</param>
+    public TransferService(
+        ITransferRepository repository,
+        IPricingPolicy pricing,
+        INotifier notifier,
+        ILogger<TransferService> log)
     {
         ArgumentNullException.ThrowIfNull(repository);
         ArgumentNullException.ThrowIfNull(pricing);
         ArgumentNullException.ThrowIfNull(notifier);
+        ArgumentNullException.ThrowIfNull(log);
+        _log = log;
         _repository = repository;
         _pricing = pricing;
         _notifier = notifier;
@@ -30,8 +40,11 @@ public sealed class TransferService
     public void Place(Transfer transfer)
     {
         ArgumentNullException.ThrowIfNull(transfer);
+        using IDisposable? scope = TransferLog.Scope(_log, transfer.Id);
+        TransferLog.RegistrationStarted(_log, transfer.Id);
         _repository.Add(transfer);
         _notifier.Notify(transfer);
+        TransferLog.Registered(_log, transfer.Id);
     }
 
     /// <summary>Обчислює суму без збереження та сповіщення.</summary>
@@ -43,7 +56,13 @@ public sealed class TransferService
         decimal total = 0m;
         foreach (TransferLine line in transfer.Lines)
         {
-            total += _pricing.PriceOf(line);
+            decimal value = _pricing.PriceOf(line);
+            if (value < 0m)
+            {
+                throw new InvalidOperationException("CALC-02: політика повернула від’ємну вартість.");
+            }
+
+            total += value;
         }
 
         return total;
@@ -55,8 +74,17 @@ public sealed class TransferService
     public Transfer Load(int transferId)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(transferId);
-        return _repository.GetById(transferId) ?? throw new DomainRuleException(
-            "transfer.exists", $"Переміщення {transferId} не знайдено.");
+        using IDisposable? scope = TransferLog.Scope(_log, transferId);
+        try
+        {
+            return _repository.GetById(transferId) ?? throw new DomainRuleException(
+                "transfer.exists", $"Переміщення {transferId} не знайдено.");
+        }
+        catch (IOException exception)
+        {
+            TransferLog.StorageFailure(_log, exception, transferId);
+            throw;
+        }
     }
 
     /// <summary>Приймає позицію, вже перевірену барикадою.</summary>
@@ -65,6 +93,7 @@ public sealed class TransferService
     public void AddLine(int transferId, TransferLine line)
     {
         ArgumentNullException.ThrowIfNull(line);
+        using IDisposable? scope = TransferLog.Scope(_log, transferId);
         Transfer transfer = Load(transferId);
         if (transfer.Status != TransferStatus.New)
         {
@@ -74,6 +103,7 @@ public sealed class TransferService
         }
 
         transfer.AddLine(line);
+        TransferLog.LineAdded(_log, line.Sku, line.Quantity);
     }
 
     /// <summary>Погоджує документ, якщо ліміт покриває облікову вартість.</summary>
@@ -82,11 +112,19 @@ public sealed class TransferService
     public void Approve(int transferId, decimal allowedValue)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(allowedValue);
+        using IDisposable? scope = TransferLog.Scope(_log, transferId);
+        TransferLog.ApprovalStarted(_log, allowedValue);
         Transfer transfer = Load(transferId);
         EnsureApprovable(transfer);
         decimal required = TotalOf(transfer);
         EnsureLimit(transferId, allowedValue, required);
+        if (allowedValue > required)
+        {
+            TransferLog.UnusedLimit(_log, allowedValue - required);
+        }
+
         transfer.Approve();
+        TransferLog.Approved(_log, transferId, required);
     }
 
     /// <summary>Скасовує документ з поясненою причиною.</summary>
@@ -95,6 +133,7 @@ public sealed class TransferService
     public void Cancel(int transferId, string reason)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(reason);
+        using IDisposable? scope = TransferLog.Scope(_log, transferId);
         Transfer transfer = Load(transferId);
         if (transfer.Status is not (TransferStatus.New or TransferStatus.Approved))
         {
@@ -104,6 +143,7 @@ public sealed class TransferService
         }
 
         transfer.Cancel();
+        TransferLog.Cancelled(_log, transferId, reason);
     }
 
     private static void EnsureApprovable(Transfer transfer)

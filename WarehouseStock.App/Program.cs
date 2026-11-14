@@ -1,7 +1,10 @@
-using System.Globalization;
 using System.Text;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using WarehouseStock.App;
+using WarehouseStock.App.Diagnostics;
+using WarehouseStock.App.Infrastructure;
 using WarehouseStock.App.Input;
-using WarehouseStock.Core.Domain;
 using WarehouseStock.Core.Errors;
 using WarehouseStock.Core.Notifications;
 using WarehouseStock.Core.Pricing;
@@ -9,22 +12,73 @@ using WarehouseStock.Core.Services;
 using WarehouseStock.Core.Storage;
 
 Console.OutputEncoding = Encoding.UTF8;
-TransferService service = new(
-    new InMemoryTransferRepository(),
-    new DiscountPricingPolicy(0.10m),
-    new TextWriterNotifier(Console.Out));
-Transfer transfer = new(1, 10, 20, new DateOnly(2026, 11, 14));
-service.Place(transfer);
-using StringReader demonstration = new("SKU-1\nдві\n100\nSKU-1\n2\n100\n");
-TextReader input = args.Contains("--interactive", StringComparer.Ordinal) ? Console.In : demonstration;
-Result<TransferLine> result = LineInput.ReadValidLine(input, Console.Out);
-if (!result.IsSuccess)
+if (OperatingSystem.IsWindows())
 {
-    Console.WriteLine(result.Error);
-    return 1;
+    Console.Title = "WarehouseStock - ЛР5";
 }
 
-service.AddLine(transfer.Id, result.Value);
-service.Approve(transfer.Id, 200m);
-Console.WriteLine("Сума: " + service.TotalOf(transfer).ToString("F2", CultureInfo.InvariantCulture));
-return 0;
+using ILoggerFactory factory = LoggerFactory.Create(builder =>
+{
+    builder.AddSimpleConsole(options =>
+    {
+        options.TimestampFormat = "HH:mm:ss ";
+        options.IncludeScopes = true;
+        options.ColorBehavior = LoggerColorBehavior.Disabled;
+    });
+    builder.SetMinimumLevel(LogLevel.Debug);
+});
+ILogger log = factory.CreateLogger("WarehouseStock.App");
+int exitCode;
+try
+{
+    exitCode = RunApplication(args, factory);
+}
+catch (DomainRuleException exception)
+{
+    ApplicationLog.Rule(log, exception.Rule, exception.Message);
+    Console.WriteLine("Правило: " + exception.Message);
+    exitCode = 1;
+}
+catch (IOException exception)
+{
+    ApplicationLog.IoFailure(log, exception);
+    Console.WriteLine("Файл або сховище зайняті; закрийте файл і повторіть.");
+    exitCode = 3;
+}
+catch (UnauthorizedAccessException exception)
+{
+    ApplicationLog.AccessDenied(log, exception);
+    Console.WriteLine("Немає прав на запис у вибрану теку.");
+    exitCode = 4;
+}
+catch (Exception exception)
+{
+    ApplicationLog.Unexpected(log, exception);
+    Console.WriteLine("Внутрішня помилка; подробиці в журналі.");
+    exitCode = 2;
+}
+
+if (!Console.IsInputRedirected && !args.Contains("--no-pause", StringComparer.Ordinal))
+{
+    Console.WriteLine("Натисніть Enter для завершення.");
+    Console.ReadLine();
+}
+
+return exitCode;
+
+static int RunApplication(string[] arguments, ILoggerFactory logFactory)
+{
+    DemoTransferRepository repository = new(new InMemoryTransferRepository());
+    TransferService service = new(
+        repository,
+        new DiscountPricingPolicy(0.10m),
+        new TextWriterNotifier(Console.Out),
+        logFactory.CreateLogger<TransferService>());
+    using DemonstrationInput demonstration = new(Console.Out);
+    bool interactive = arguments.Contains("--interactive", StringComparer.Ordinal);
+    TextReader input = interactive ? Console.In : demonstration;
+    Action failure = interactive ? static () => { } : repository.FailNextRead;
+    Console.WriteLine(interactive ? "Режим вводу." : "Демонстрація: помилка вводу та один штучний збій сховища.");
+    TransferScenario scenario = new(service, Console.Out, failure);
+    return scenario.Run(input);
+}

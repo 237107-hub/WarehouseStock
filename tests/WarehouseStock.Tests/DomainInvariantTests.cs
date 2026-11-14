@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging.Abstractions;
 using WarehouseStock.Core.Domain;
 using WarehouseStock.Core.Notifications;
 using WarehouseStock.Core.Pricing;
@@ -29,7 +30,7 @@ public sealed class DomainInvariantTests
     {
         InMemoryTransferRepository repository = new();
         TransferService service = new(repository, new DiscountPricingPolicy(0.10m),
-            new TextWriterNotifier(TextWriter.Null));
+            new TextWriterNotifier(TextWriter.Null), NullLogger<TransferService>.Instance);
         Transfer transfer = NewTransfer(2);
         transfer.AddLine(new TransferLine("SKU-1", 2, 100m));
         service.Place(transfer);
