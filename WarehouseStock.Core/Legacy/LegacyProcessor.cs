@@ -1,3 +1,5 @@
+using WarehouseStock.Core.Documents;
+
 namespace WarehouseStock.Core.Legacy;
 
 /// <summary>Еталонний довгий розрахунок для характеризаційних тестів.</summary>
@@ -25,30 +27,8 @@ public static class LegacyProcessor
     {
         newStatus = status;
         decimal total = 0;
-        if (docId <= 0)
-        {
-            Console.WriteLine("Помилка: номер документа");
-            return -1;
-        }
-
-        if (clientName == null || clientName == string.Empty)
-        {
-            Console.WriteLine("Помилка: немає клієнта");
-            return -1;
-        }
-
-        if (clientEmail == null || !clientEmail.Contains('@'))
-        {
-            Console.WriteLine("Помилка: пошта клієнта");
-            return -1;
-        }
-
-        if (lines == null || lines.Count == 0)
-        {
-            Console.WriteLine("Помилка: немає позицій");
-            return -1;
-        }
-
+        DocumentGuards.EnsureHeaderValid(docId, clientName, clientEmail);
+        DocumentGuards.EnsureLinesValid(lines);
         if (status != "New" && status != "Approved"
             && status != "Dispatched" && status != "Cancelled")
         {
@@ -58,18 +38,6 @@ public static class LegacyProcessor
 
         for (int i = 0; i < lines.Count; i++)
         {
-            if (lines[i].Quantity <= 0)
-            {
-                Console.WriteLine("Помилка: кількість");
-                return -1;
-            }
-
-            if (lines[i].UnitPrice < 0)
-            {
-                Console.WriteLine("Помилка: ціна");
-                return -1;
-            }
-
             decimal sum = lines[i].Quantity * lines[i].UnitPrice;
             if (lines[i].Quantity >= 10)
                 sum = sum * 0.95m;

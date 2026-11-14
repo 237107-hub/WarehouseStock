@@ -1,3 +1,4 @@
+using WarehouseStock.Core.Documents;
 using WarehouseStock.Core.Legacy;
 
 namespace WarehouseStock.Tests;
@@ -31,13 +32,11 @@ public sealed class LegacyProcessorTests
     }
 
     [Fact]
-    public void NoLinesReturnsMinusOne()
+    public void NoLinesThrowArgumentException()
     {
-        decimal total = LegacyProcessor.Process(
+        Assert.Throws<ArgumentException>(() => LegacyProcessor.Process(
             3, "Східний склад", "east@example.com", false, new List<TransferLine>(),
-            new DateOnly(2026, 3, 10), string.Empty, "New", false, 60m, out _);
-
-        Assert.Equal(-1m, total);
+            new DateOnly(2026, 3, 10), string.Empty, "New", false, 60m, out _));
     }
 
     private static List<TransferLine> SampleLines() => new()

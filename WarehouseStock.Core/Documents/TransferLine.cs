@@ -1,4 +1,4 @@
-namespace WarehouseStock.Core.Legacy;
+namespace WarehouseStock.Core.Documents;
 
 /// <summary>Позиція успадкованого розрахунку переміщення.</summary>
 public sealed class TransferLine
