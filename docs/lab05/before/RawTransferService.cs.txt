@@ -1,0 +1,18 @@
+// Навчальні дефекти перед побудовою барикади й власного винятку.
+public void AddLine(int transferId, string sku, string quantity, string price)
+{
+    var transfer = _repo.GetById(transferId);
+    var q = int.Parse(quantity);
+    var p = decimal.Parse(price);
+    transfer.Lines.Add(new LegacyLine { Sku = sku, Quantity = q, UnitPrice = p });
+}
+
+public int Approve(int transferId, decimal allowedValue)
+{
+    var transfer = _repo.GetById(transferId);
+    if (transfer == null) return -1;
+    if (transfer.Status != 0) return -2;
+    if (allowedValue < TotalOf(transfer)) return -3;
+    transfer.Status = 1;
+    return 0;
+}
