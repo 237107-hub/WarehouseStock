@@ -1,30 +1,12 @@
-using System.Globalization;
-using WarehouseStock.Core.Domain;
+﻿using System.Text;
+using WarehouseStock.Core.Legacy;
 
-Transfer transfer = new()
-{
-    Id = 1,
-    SourceWarehouseId = 10,
-    DestinationWarehouseId = 20,
-    CreatedAt = DateTimeOffset.Now,
-};
-
-transfer.AddLine(new TransferLine
-{
-    Sku = "SKU-001",
-    Quantity = 2,
-    UnitPrice = 149.50m,
-});
-
-transfer.AddLine(new TransferLine
-{
-    Sku = "SKU-002",
-    Quantity = 1,
-    UnitPrice = 89.90m,
-});
-
-string total = transfer.Total().ToString("F2", CultureInfo.InvariantCulture);
-Console.WriteLine($"Transfer #{transfer.Id}");
-Console.WriteLine($"Route: {transfer.SourceWarehouseId} -> {transfer.DestinationWarehouseId}");
-Console.WriteLine($"Status: {transfer.Status}");
-Console.WriteLine($"Total: {total}");
+Console.OutputEncoding = Encoding.UTF8;
+var z = new peremishchennia("A-1001", "Центральний склад");
+z.Add("SKU-1", 3, 250m);
+z.Add("SKU-2", 12, 90m);
+Console.WriteLine(z.ProcessData(false));
+Console.WriteLine(z.ProcessData(true));
+Console.WriteLine(z.Ck());
+Console.WriteLine(z.Chg(1));
+Console.Write(z.Rep());
