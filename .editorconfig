@@ -1,4 +1,4 @@
-﻿root = true
+root = true
 
 [*]
 charset = utf-8
@@ -59,24 +59,36 @@ dotnet_naming_symbols.interfaces.applicable_kinds = interface
 dotnet_naming_style.interface_style.required_prefix = I
 dotnet_naming_style.interface_style.capitalization = pascal_case
 
-# Навчальний проєкт не потребує ліцензійного заголовка в кожному файлі.
+# Використовуємо using перед файловим простором імен.
+csharp_using_directive_placement = outside_namespace:warning
+
+# Константи PascalCase мають пріоритет над загальним правилом приватних полів.
+dotnet_naming_rule.constants_rule.symbols = constants
+dotnet_naming_rule.constants_rule.style = pascal_case
+dotnet_naming_rule.constants_rule.severity = warning
+dotnet_naming_symbols.constants.applicable_kinds = field
+dotnet_naming_symbols.constants.required_modifiers = const
+
+# Навчальний проєкт не потребує ліцензійного заголовка у кожному файлі.
 dotnet_diagnostic.SA1633.severity = none
-
-# Звертання до членів без this. відповідає стандарту проєкту.
+# Префікс this. не передбачений стандартом проєкту.
 dotnet_diagnostic.SA1101.severity = none
-
-# Приватні поля мають префікс _, закріплений правилами іменування.
+# Приватні поля _camelCase перевіряються правилами іменування Roslyn.
 dotnet_diagnostic.SA1309.severity = none
+# using поза namespace відповідає стандарту файлових просторів імен.
+dotnet_diagnostic.SA1200.severity = none
+# Документація українською: не вимагаємо англійських шаблонних фраз.
+dotnet_diagnostic.SA1623.severity = none
+dotnet_diagnostic.SA1642.severity = none
 
-# Повну XML-документацію запроваджуємо з лабораторної роботи №4.
-dotnet_diagnostic.SA0001.severity = none
-dotnet_diagnostic.SA1600.severity = none
-dotnet_diagnostic.SA1601.severity = none
-dotnet_diagnostic.SA1602.severity = none
+# З ЛР2 наявність XML-документації є обов'язковою.
+dotnet_diagnostic.SA0001.severity = warning
+dotnet_diagnostic.SA1600.severity = warning
+dotnet_diagnostic.SA1601.severity = warning
+dotnet_diagnostic.SA1602.severity = warning
 
-# Перевірки оформлення залишаємо активними.
+# Перевірки оформлення залишаються активними.
 dotnet_diagnostic.SA1028.severity = warning
 dotnet_diagnostic.SA1201.severity = warning
 dotnet_diagnostic.SA1503.severity = warning
 dotnet_diagnostic.SA1516.severity = warning
-dotnet_diagnostic.IDE0055.severity = warning
