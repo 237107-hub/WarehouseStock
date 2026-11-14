@@ -489,3 +489,8 @@ data/*.local.json
 
 # «бер≥гати консольний проЇкт .App
 !WarehouseStock.App/
+
+# Lab05 generated logs and application output
+*.log
+*.audit
+**/data/

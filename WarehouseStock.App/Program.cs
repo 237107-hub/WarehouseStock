@@ -80,5 +80,21 @@ static int RunApplication(string[] arguments, ILoggerFactory logFactory)
     Action failure = interactive ? static () => { } : repository.FailNextRead;
     Console.WriteLine(interactive ? "Режим вводу." : "Демонстрація: помилка вводу та один штучний збій сховища.");
     TransferScenario scenario = new(service, Console.Out, failure);
-    return scenario.Run(input);
+    int result = scenario.Run(input);
+    if (result == 0)
+    {
+        WriteReports(service);
+    }
+
+    return result;
+}
+
+static void WriteReports(TransferService service)
+{
+    string directory = Path.Combine(AppContext.BaseDirectory, "data");
+    Directory.CreateDirectory(directory);
+    using FileAuditLog audit = new(Path.Combine(directory, "audit.log"));
+    audit.Write("approve", 1);
+    TransferReportExporter.ExportReport(Path.Combine(directory, "transfer.txt"), service.Load(1), service);
+    Console.WriteLine("Аудит і звіт збережено у " + directory);
 }
