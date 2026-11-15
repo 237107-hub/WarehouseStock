@@ -9,9 +9,18 @@ internal static class TestApi
         bool send = false) => processor.Handle(new TransferRequest
         {
             DocumentId = 1001,
-            Client = new WarehouseClient { Id = 7, Name = "Іван", Email = mail!,
-                Kind = LegacyCodes.Client(kind), DoneCount = done },
-            Items = items, State = LegacyCodes.State(state), Currency = "UAH", SendMail = send,
+            Client = new WarehouseClient
+            {
+                Id = 7,
+                Name = "Іван",
+                Email = mail!,
+                Kind = LegacyCodes.Client(kind),
+                DoneCount = done
+            },
+            Items = items,
+            State = LegacyCodes.State(state),
+            Currency = "UAH",
+            SendMail = send,
         });
 
     internal static decimal Preview(LegacyTransferProcessor processor, string kind, int done,

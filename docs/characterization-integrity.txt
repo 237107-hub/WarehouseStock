@@ -1,0 +1,2 @@
+Assertions and all C# tokens unchanged; only whitespace formatting permitted.
+SHA256 before formatting: 386350e41b812a173a7b262f17a484cc38ece808923073751f76bed705609411
