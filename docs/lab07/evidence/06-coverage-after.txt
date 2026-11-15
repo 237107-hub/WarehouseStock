@@ -1,0 +1,14 @@
+$ dotnet test tests/WarehouseStock.Tests --no-restore --collect:XPlat Code Coverage --settings coverage.runsettings --results-directory C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\construction_lab7\coverage-after -v:minimal
+  WarehouseStock.Core -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\WarehouseStock.Core\bin\Debug\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.App -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\WarehouseStock.App\bin\Debug\net8.0\WarehouseStock.App.dll
+  WarehouseStock.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    92, Skipped:     0, Total:    92, Duration: 53 ms - WarehouseStock.Tests.dll (net8.0)
+
+Attachments:
+  C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\construction_lab7\coverage-after\1c5e4880-fe38-477c-ab44-b61e01b222b3\coverage.cobertura.xml

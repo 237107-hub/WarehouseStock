@@ -1,0 +1,20 @@
+$ dotnet test --no-restore -v:minimal
+  WarehouseStock.Legacy -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\src\Legacy\bin\Debug\net8.0\WarehouseStock.Legacy.dll
+  WarehouseStock.Core -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\WarehouseStock.Core\bin\Debug\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.Legacy.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\Legacy.Tests\bin\Debug\net8.0\WarehouseStock.Legacy.Tests.dll
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\Legacy.Tests\bin\Debug\net8.0\WarehouseStock.Legacy.Tests.dll (.NETCoreApp,Version=v8.0)
+  WarehouseStock.App -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\WarehouseStock.App\bin\Debug\net8.0\WarehouseStock.App.dll
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+  WarehouseStock.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\WarehouseStock.Tests\bin\Debug\net8.0\WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    30, Skipped:     0, Total:    30, Duration: 80 ms - WarehouseStock.Legacy.Tests.dll (net8.0)
+
+Passed!  - Failed:     0, Passed:    77, Skipped:     0, Total:    77, Duration: 90 ms - WarehouseStock.Tests.dll (net8.0)
