@@ -37,31 +37,9 @@ public class LegacyTransferProcessor
         if (error != null) return error;
         _log.Add("ok " + docId);
 
-        _tmpSum = 0m;
-        for (int i = 0; i < items!.Count; i++)
-        {
-            _tmpSum += items[i].Qty * items[i].Price;
-        }
-
-        _tmpDiscount = 0m;
-        if (clientKind == ClientKind.Vip)
-        {
-            _tmpDiscount = _tmpSum * PricingRules.VipRate;
-            if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
-        }
-        else if (clientKind == ClientKind.Staff)
-        {
-            _tmpDiscount = _tmpSum * PricingRules.StaffRate;
-            if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
-        }
-        else if (clientDone > PricingRules.LoyaltyThreshold)
-        {
-            _tmpDiscount = _tmpSum * PricingRules.LoyalRate;
-            if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
-        }
-
-        decimal ship = 0m;
-        if (_tmpSum - _tmpDiscount < PricingRules.FreeShippingThreshold) ship = PricingRules.DeliveryFee;
+        _tmpSum = Subtotal(items!);
+        _tmpDiscount = DiscountOf(_tmpSum, clientKind, clientDone);
+        decimal ship = ShippingOf(_tmpSum - _tmpDiscount);
         decimal total = _tmpSum - _tmpDiscount + ship;
 
         string txt = "Документ #" + docId + "\n";
@@ -90,6 +68,42 @@ public class LegacyTransferProcessor
         if (state != DocState.New && state != DocState.Paid) return "ERR: state";
         if (mail == null || !mail.Contains('@')) return "ERR: mail";
         return null;
+    }
+
+    private static decimal Subtotal(List<TransferItem> items)
+    {
+        decimal sum = 0m;
+        foreach (var item in items) sum += item.Qty * item.Price;
+        return sum;
+    }
+
+    private static decimal DiscountOf(decimal subtotal, ClientKind clientKind, int clientDone)
+    {
+        decimal discount = 0m;
+        if (clientKind == ClientKind.Vip)
+        {
+            discount = subtotal * PricingRules.VipRate;
+            if (discount > PricingRules.MaximumDiscount) discount = PricingRules.MaximumDiscount;
+        }
+        else if (clientKind == ClientKind.Staff)
+        {
+            discount = subtotal * PricingRules.StaffRate;
+            if (discount > PricingRules.MaximumDiscount) discount = PricingRules.MaximumDiscount;
+        }
+        else if (clientDone > PricingRules.LoyaltyThreshold)
+        {
+            discount = subtotal * PricingRules.LoyalRate;
+            if (discount > PricingRules.MaximumDiscount) discount = PricingRules.MaximumDiscount;
+        }
+
+        return discount;
+    }
+
+    private static decimal ShippingOf(decimal payable)
+    {
+        decimal ship = 0m;
+        if (payable < PricingRules.FreeShippingThreshold) ship = PricingRules.DeliveryFee;
+        return ship;
     }
 
     public decimal Preview(ClientKind clientKind, int clientDone, List<TransferItem> items)
