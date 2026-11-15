@@ -504,3 +504,5 @@ coverage/
 appsettings.Local.json
 *.secrets.json
 .env*
+
+artifacts/

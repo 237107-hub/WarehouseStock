@@ -2,7 +2,7 @@ root = true
 
 [*]
 charset = utf-8
-end_of_line = crlf
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
@@ -92,4 +92,3 @@ dotnet_diagnostic.SA1028.severity = warning
 dotnet_diagnostic.SA1201.severity = warning
 dotnet_diagnostic.SA1503.severity = warning
 dotnet_diagnostic.SA1516.severity = warning
-
