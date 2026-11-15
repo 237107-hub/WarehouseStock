@@ -9,6 +9,7 @@ public static class VersionInfo
     /// <returns>Версія у форматі major.minor.patch.</returns>
     public static string Current()
     {
+        string note;
         var assembly = typeof(VersionInfo).Assembly;
         var attribute = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
         var raw = attribute?.InformationalVersion ?? "0.0.0";
