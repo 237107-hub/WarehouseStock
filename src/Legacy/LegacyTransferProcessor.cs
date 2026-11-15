@@ -72,22 +72,22 @@ public class LegacyTransferProcessor
         _tmpDiscount = 0m;
         if (clientKind == "vip")
         {
-            _tmpDiscount = _tmpSum * 0.15m;
-            if (_tmpDiscount > 500m) _tmpDiscount = 500m;
+            _tmpDiscount = _tmpSum * PricingRules.VipRate;
+            if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
         }
         else if (clientKind == "staff")
         {
-            _tmpDiscount = _tmpSum * 0.30m;
-            if (_tmpDiscount > 500m) _tmpDiscount = 500m;
+            _tmpDiscount = _tmpSum * PricingRules.StaffRate;
+            if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
         }
-        else if (clientDone > 10)
+        else if (clientDone > PricingRules.LoyaltyThreshold)
         {
-            _tmpDiscount = _tmpSum * 0.05m;
-            if (_tmpDiscount > 500m) _tmpDiscount = 500m;
+            _tmpDiscount = _tmpSum * PricingRules.LoyalRate;
+            if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
         }
 
         decimal ship = 0m;
-        if (_tmpSum - _tmpDiscount < 1000m) ship = 60m;
+        if (_tmpSum - _tmpDiscount < PricingRules.FreeShippingThreshold) ship = PricingRules.DeliveryFee;
         decimal total = _tmpSum - _tmpDiscount + ship;
 
         string txt = "Документ #" + docId + "\n";
@@ -120,22 +120,22 @@ public class LegacyTransferProcessor
         decimal d = 0m;
         if (clientKind == "vip")
         {
-            d = s * 0.15m;
-            if (d > 500m) d = 500m;
+            d = s * PricingRules.VipRate;
+            if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
         }
         else if (clientKind == "staff")
         {
-            d = s * 0.30m;
-            if (d > 500m) d = 500m;
+            d = s * PricingRules.StaffRate;
+            if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
         }
-        else if (clientDone > 10)
+        else if (clientDone > PricingRules.LoyaltyThreshold)
         {
-            d = s * 0.05m;
-            if (d > 500m) d = 500m;
+            d = s * PricingRules.LoyalRate;
+            if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
         }
 
         decimal sh = 0m;
-        if (s - d < 1000m) sh = 60m;
+        if (s - d < PricingRules.FreeShippingThreshold) sh = PricingRules.DeliveryFee;
         return s - d + sh;
     }
 
@@ -143,7 +143,7 @@ public class LegacyTransferProcessor
     {
         string s = c.Name.Trim().ToUpper();
         if (c.Kind == "vip") s += " [VIP]";
-        if (c.DoneCount > 10) s += " [ЛОЯЛЬНИЙ]";
+        if (c.DoneCount > PricingRules.LoyaltyThreshold) s += " [ЛОЯЛЬНИЙ]";
         s += " <" + c.Email.ToLower() + ">";
         int years = DateTime.Now.Year - c.SinceUtc.Year;
         s += " стаж " + years;
