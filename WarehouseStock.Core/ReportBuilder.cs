@@ -1,23 +1,26 @@
+using System.Text;
+
 namespace WarehouseStock.Core;
 
-/// <summary>Навмисно дефектний звіт для вправи статичного аналізу.</summary>
-public class ReportBuilder
+/// <summary>Формує простий текстовий звіт із готових рядків.</summary>
+public sealed class ReportBuilder
 {
-    /// <summary>Заголовок звіту.</summary>
-    public string Title = "Звіт";
+    /// <summary>Заголовок, що задається при створенні.</summary>
+    public string Title { get; init; } = "Звіт";
 
-    /// <summary>Об'єднує рядки.</summary>
-    /// <param name="rows">Рядки звіту.</param>
-    /// <returns>Готовий текст.</returns>
-    public string Build(List<string> rows)
+    /// <summary>Об'єднує рядки без конкатенації в циклі.</summary>
+    /// <param name="rows">Ненульова колекція рядків.</param>
+    /// <returns>Текст із платформними переносами рядків.</returns>
+    public string Build(IReadOnlyList<string> rows)
     {
-        string text = "";
-        int notUsed = 0;
-        foreach (var row in rows)
+        ArgumentNullException.ThrowIfNull(rows);
+        var text = new StringBuilder();
+        text.AppendLine(Title.ToUpperInvariant());
+        foreach (string row in rows)
         {
-            text = text + row + Environment.NewLine;
+            text.AppendLine(row);
         }
 
-        return Title.ToUpper() + Environment.NewLine + text;
+        return text.ToString();
     }
 }
