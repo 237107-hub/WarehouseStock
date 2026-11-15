@@ -1,0 +1,476 @@
+{
+  "before": [
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Handle",
+      "cc": 17,
+      "ifs": 12,
+      "loops": 2,
+      "logical": 2,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 11,
+      "returns": 5,
+      "depth": 4,
+      "loc": 75,
+      "physicalBodyLines": 74,
+      "conditions": [
+        {
+          "line": 36,
+          "text": "items != null"
+        },
+        {
+          "line": 38,
+          "text": "items.Count > 0"
+        },
+        {
+          "line": 40,
+          "text": "state == \"new\" || state == \"paid\""
+        },
+        {
+          "line": 42,
+          "text": "clientMail != null && clientMail.Contains(\"@\")"
+        },
+        {
+          "line": 67,
+          "text": "i < items.Count"
+        },
+        {
+          "line": 73,
+          "text": "clientKind == \"vip\""
+        },
+        {
+          "line": 76,
+          "text": "_tmpDiscount > 500m"
+        },
+        {
+          "line": 78,
+          "text": "clientKind == \"staff\""
+        },
+        {
+          "line": 81,
+          "text": "_tmpDiscount > 500m"
+        },
+        {
+          "line": 83,
+          "text": "clientDone > 10"
+        },
+        {
+          "line": 86,
+          "text": "_tmpDiscount > 500m"
+        },
+        {
+          "line": 90,
+          "text": "_tmpSum - _tmpDiscount < 1000m"
+        },
+        {
+          "line": 95,
+          "text": "i < items.Count"
+        },
+        {
+          "line": 104,
+          "text": "sendMail"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Preview",
+      "cc": 9,
+      "ifs": 7,
+      "loops": 1,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 3,
+      "returns": 1,
+      "depth": 2,
+      "loc": 27,
+      "physicalBodyLines": 26,
+      "conditions": [
+        {
+          "line": 115,
+          "text": "items"
+        },
+        {
+          "line": 121,
+          "text": "clientKind == \"vip\""
+        },
+        {
+          "line": 124,
+          "text": "d > 500m"
+        },
+        {
+          "line": 126,
+          "text": "clientKind == \"staff\""
+        },
+        {
+          "line": 129,
+          "text": "d > 500m"
+        },
+        {
+          "line": 131,
+          "text": "clientDone > 10"
+        },
+        {
+          "line": 134,
+          "text": "d > 500m"
+        },
+        {
+          "line": 138,
+          "text": "s - d < 1000m"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "DescribeClient",
+      "cc": 3,
+      "ifs": 2,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 1,
+      "returns": 1,
+      "depth": 1,
+      "loc": 10,
+      "physicalBodyLines": 7,
+      "conditions": [
+        {
+          "line": 145,
+          "text": "c.Kind == \"vip\""
+        },
+        {
+          "line": 146,
+          "text": "c.DoneCount > 10"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "DumpLog",
+      "cc": 2,
+      "ifs": 0,
+      "loops": 1,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 0,
+      "returns": 1,
+      "depth": 1,
+      "loc": 6,
+      "physicalBodyLines": 3,
+      "conditions": [
+        {
+          "line": 156,
+          "text": "_log"
+        }
+      ]
+    }
+  ],
+  "after": [
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\DiscountPolicy.cs",
+      "name": "Calculate",
+      "cc": 7,
+      "ifs": 6,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 3,
+      "returns": 1,
+      "depth": 2,
+      "loc": 20,
+      "physicalBodyLines": 18,
+      "conditions": [
+        {
+          "line": 8,
+          "text": "clientKind == ClientKind.Vip"
+        },
+        {
+          "line": 11,
+          "text": "discount > PricingRules.MaximumDiscount"
+        },
+        {
+          "line": 13,
+          "text": "clientKind == ClientKind.Staff"
+        },
+        {
+          "line": 16,
+          "text": "discount > PricingRules.MaximumDiscount"
+        },
+        {
+          "line": 18,
+          "text": "clientDone > PricingRules.LoyaltyThreshold"
+        },
+        {
+          "line": 21,
+          "text": "discount > PricingRules.MaximumDiscount"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyCodes.cs",
+      "name": "Client",
+      "cc": 3,
+      "ifs": 0,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 2,
+      "guards": 0,
+      "parameters": 1,
+      "returns": 0,
+      "depth": 0,
+      "loc": 6,
+      "physicalBodyLines": 1,
+      "conditions": [
+        {
+          "line": 10,
+          "text": "\"vip\" => ClientKind.Vip"
+        },
+        {
+          "line": 11,
+          "text": "\"staff\" => ClientKind.Staff"
+        },
+        {
+          "line": 12,
+          "text": "_ => ClientKind.Regular"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyCodes.cs",
+      "name": "State",
+      "cc": 3,
+      "ifs": 0,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 2,
+      "guards": 0,
+      "parameters": 1,
+      "returns": 0,
+      "depth": 0,
+      "loc": 6,
+      "physicalBodyLines": 1,
+      "conditions": [
+        {
+          "line": 17,
+          "text": "\"new\" => DocState.New"
+        },
+        {
+          "line": 18,
+          "text": "\"paid\" => DocState.Paid"
+        },
+        {
+          "line": 19,
+          "text": "_ => DocState.Other"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Describe",
+      "cc": 3,
+      "ifs": 2,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 0,
+      "returns": 1,
+      "depth": 1,
+      "loc": 10,
+      "physicalBodyLines": 7,
+      "conditions": [
+        {
+          "line": 18,
+          "text": "Kind == ClientKind.Vip"
+        },
+        {
+          "line": 19,
+          "text": "DoneCount > PricingRules.LoyaltyThreshold"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Handle",
+      "cc": 3,
+      "ifs": 2,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 1,
+      "returns": 2,
+      "depth": 1,
+      "loc": 16,
+      "physicalBodyLines": 16,
+      "conditions": [
+        {
+          "line": 42,
+          "text": "error != null"
+        },
+        {
+          "line": 51,
+          "text": "request.SendMail"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Validate",
+      "cc": 7,
+      "ifs": 4,
+      "loops": 0,
+      "logical": 2,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 3,
+      "returns": 5,
+      "depth": 1,
+      "loc": 8,
+      "physicalBodyLines": 5,
+      "conditions": [
+        {
+          "line": 61,
+          "text": "items == null"
+        },
+        {
+          "line": 62,
+          "text": "items.Count == 0"
+        },
+        {
+          "line": 63,
+          "text": "state != DocState.New && state != DocState.Paid"
+        },
+        {
+          "line": 64,
+          "text": "mail == null || !mail.Contains('@')"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Subtotal",
+      "cc": 2,
+      "ifs": 0,
+      "loops": 1,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 1,
+      "returns": 1,
+      "depth": 1,
+      "loc": 6,
+      "physicalBodyLines": 3,
+      "conditions": [
+        {
+          "line": 71,
+          "text": "items"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "Preview",
+      "cc": 1,
+      "ifs": 0,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 3,
+      "returns": 1,
+      "depth": 0,
+      "loc": 6,
+      "physicalBodyLines": 3,
+      "conditions": []
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+      "name": "DumpLog",
+      "cc": 2,
+      "ifs": 0,
+      "loops": 1,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 0,
+      "returns": 1,
+      "depth": 1,
+      "loc": 6,
+      "physicalBodyLines": 3,
+      "conditions": [
+        {
+          "line": 85,
+          "text": "_log"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\ReportBuilder.cs",
+      "name": "Build",
+      "cc": 2,
+      "ifs": 0,
+      "loops": 1,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 7,
+      "returns": 1,
+      "depth": 1,
+      "loc": 15,
+      "physicalBodyLines": 12,
+      "conditions": [
+        {
+          "line": 10,
+          "text": "i < items.Count"
+        }
+      ]
+    },
+    {
+      "file": "C:\\Users\\Макс\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\ShippingPolicy.cs",
+      "name": "Calculate",
+      "cc": 2,
+      "ifs": 1,
+      "loops": 0,
+      "logical": 0,
+      "ternary": 0,
+      "arms": 0,
+      "guards": 0,
+      "parameters": 1,
+      "returns": 1,
+      "depth": 1,
+      "loc": 6,
+      "physicalBodyLines": 3,
+      "conditions": [
+        {
+          "line": 8,
+          "text": "payable < PricingRules.FreeShippingThreshold"
+        }
+      ]
+    }
+  ],
+  "totalLocBefore": 143,
+  "totalLocAfter": 167,
+  "testsLegacy": 30,
+  "testsPrevious": 65,
+  "testCommit": "fb11d1d3c43a4f9516d78e030aa298054a481407"
+}
