@@ -12,6 +12,9 @@ public static class TransferDiscountPolicy
     /// <summary>Включна нижня межа великого відвантаження.</summary>
     public const decimal BulkFrom = 1000m;
 
+    /// <summary>Максимальна знижка в гривнях.</summary>
+    public const decimal MaximumDiscount = 150m;
+
     /// <summary>Обчислює суму знижки з округленням до копійок.</summary>
     /// <param name="amount">Невід'ємна вартість відвантаження.</param>
     /// <param name="isRegular">Ознака постійного одержувача.</param>
@@ -34,6 +37,12 @@ public static class TransferDiscountPolicy
             rate += BulkRate;
         }
 
-        return decimal.Round(amount * rate, 2);
+        decimal discount = decimal.Round(amount * rate, 2);
+        if (discount > MaximumDiscount)
+        {
+            discount = MaximumDiscount;
+        }
+
+        return discount;
     }
 }
