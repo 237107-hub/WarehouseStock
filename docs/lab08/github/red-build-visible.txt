@@ -1,0 +1,69 @@
+Annotations
+3 errors, 1 warning, and 1 notice
+quality
+failed  in 38s
+Explain error
+Set up job
+1s
+Checkout
+1s
+Install SDK and NET 8 runtime
+8s
+Restore locked dependencies and audit
+8s
+Verify formatting and analyzers
+13s
+Build Release
+5s
+1
+Run dotnet build -c Release --no-restore
+
+9
+  WarehouseStock.Legacy -> /home/runner/work/WarehouseStock/WarehouseStock/src/Legacy/bin/Release/net8.0/WarehouseStock.Legacy.dll
+
+10
+Error: /home/runner/work/WarehouseStock/WarehouseStock/WarehouseStock.Core/VersionInfo.cs(12,16): error CS0168: The variable 'note' is declared but never used [/home/runner/work/WarehouseStock/WarehouseStock/WarehouseStock.Core/WarehouseStock.Core.csproj]
+
+11
+  WarehouseStock.Legacy.Demo -> /home/runner/work/WarehouseStock/WarehouseStock/src/Legacy.Demo/bin/Release/net8.0/WarehouseStock.Legacy.Demo.dll
+
+12
+  WarehouseStock.Legacy.Tests -> /home/runner/work/WarehouseStock/WarehouseStock/tests/Legacy.Tests/bin/Release/net8.0/WarehouseStock.Legacy.Tests.dll
+
+13
+
+
+14
+Build FAILED.
+
+15
+
+
+16
+Error: /home/runner/work/WarehouseStock/WarehouseStock/WarehouseStock.Core/VersionInfo.cs(12,16): error CS0168: The variable 'note' is declared but never used [/home/runner/work/WarehouseStock/WarehouseStock/WarehouseStock.Core/WarehouseStock.Core.csproj]
+
+17
+    0 Warning(s)
+
+18
+    1 Error(s)
+
+19
+
+
+20
+Time Elapsed 00:00:04.54
+
+21
+Error: Process completed with exit code 1.
+
+Tests and Core coverage gate
+0s
+Upload test results and coverage
+0s
+Post Install SDK and NET 8 runtime
+0s
+Post Checkout
+0s
+Complete job
+0s

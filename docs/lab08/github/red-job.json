@@ -1,0 +1,116 @@
+{
+  "id": 132806139518,
+  "run_id": 43712245001,
+  "workflow_name": "CI",
+  "head_branch": "feature/ci-pipeline",
+  "run_url": "https://api.github.com/repos/237107-hub/WarehouseStock/actions/runs/43712245001",
+  "run_attempt": 1,
+  "node_id": "CR_kwDOVvJ8G88AAAAe69zefg",
+  "head_sha": "4d0381126817f23f203b8194a096a930364fcedc",
+  "url": "https://api.github.com/repos/237107-hub/WarehouseStock/actions/jobs/132806139518",
+  "html_url": "https://github.com/237107-hub/WarehouseStock/actions/runs/43712245001/job/132806139518",
+  "status": "completed",
+  "conclusion": "failure",
+  "created_at": "2026-11-15T12:07:33Z",
+  "started_at": "2026-11-15T12:07:36Z",
+  "completed_at": "2026-11-15T12:08:14Z",
+  "name": "quality",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1,
+      "started_at": "2026-11-15T12:07:36Z",
+      "completed_at": "2026-11-15T12:07:37Z"
+    },
+    {
+      "name": "Checkout",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2,
+      "started_at": "2026-11-15T12:07:37Z",
+      "completed_at": "2026-11-15T12:07:38Z"
+    },
+    {
+      "name": "Install SDK and NET 8 runtime",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3,
+      "started_at": "2026-11-15T12:07:38Z",
+      "completed_at": "2026-11-15T12:07:46Z"
+    },
+    {
+      "name": "Restore locked dependencies and audit",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4,
+      "started_at": "2026-11-15T12:07:46Z",
+      "completed_at": "2026-11-15T12:07:54Z"
+    },
+    {
+      "name": "Verify formatting and analyzers",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5,
+      "started_at": "2026-11-15T12:07:54Z",
+      "completed_at": "2026-11-15T12:08:07Z"
+    },
+    {
+      "name": "Build Release",
+      "status": "completed",
+      "conclusion": "failure",
+      "number": 6,
+      "started_at": "2026-11-15T12:08:07Z",
+      "completed_at": "2026-11-15T12:08:12Z"
+    },
+    {
+      "name": "Tests and Core coverage gate",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 7,
+      "started_at": "2026-11-15T12:08:12Z",
+      "completed_at": "2026-11-15T12:08:12Z"
+    },
+    {
+      "name": "Upload test results and coverage",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 8,
+      "started_at": "2026-11-15T12:08:12Z",
+      "completed_at": "2026-11-15T12:08:12Z"
+    },
+    {
+      "name": "Post Install SDK and NET 8 runtime",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 15,
+      "started_at": "2026-11-15T12:08:12Z",
+      "completed_at": "2026-11-15T12:08:12Z"
+    },
+    {
+      "name": "Post Checkout",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 16,
+      "started_at": "2026-11-15T12:08:12Z",
+      "completed_at": "2026-11-15T12:08:12Z"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 17,
+      "started_at": "2026-11-15T12:08:12Z",
+      "completed_at": "2026-11-15T12:08:12Z"
+    }
+  ],
+  "check_run_url": "https://api.github.com/repos/237107-hub/WarehouseStock/check-runs/132806139518",
+  "labels": [
+    "ubuntu-latest"
+  ],
+  "runner_id": 1000000022,
+  "runner_name": "GitHub Actions 1000000022",
+  "runner_group_id": 0,
+  "runner_group_name": "GitHub Actions"
+}

@@ -1,0 +1,3 @@
+# The laboratory requires Method_Situation_Expected test names.
+[*.cs]
+dotnet_diagnostic.CA1707.severity = none

@@ -1,0 +1,62 @@
+[
+  {
+    "path": ".github",
+    "blob_href": "https://github.com/237107-hub/WarehouseStock/blob/4d0381126817f23f203b8194a096a930364fcedc/.github",
+    "start_line": 19,
+    "start_column": null,
+    "end_line": 19,
+    "end_column": null,
+    "annotation_level": "warning",
+    "title": "",
+    "message": "No files were found with the provided path: artifacts/test-results/**/*.trx\n**/coverage/coverage.cobertura.xml. No artifacts will be uploaded.",
+    "raw_details": ""
+  },
+  {
+    "path": ".github",
+    "blob_href": "https://github.com/237107-hub/WarehouseStock/blob/4d0381126817f23f203b8194a096a930364fcedc/.github",
+    "start_line": 22,
+    "start_column": null,
+    "end_line": 22,
+    "end_column": null,
+    "annotation_level": "failure",
+    "title": "",
+    "message": "Process completed with exit code 1.",
+    "raw_details": ""
+  },
+  {
+    "path": "WarehouseStock.Core/VersionInfo.cs",
+    "blob_href": "https://github.com/237107-hub/WarehouseStock/blob/4d0381126817f23f203b8194a096a930364fcedc/WarehouseStock.Core/VersionInfo.cs",
+    "start_line": 12,
+    "start_column": 16,
+    "end_line": 12,
+    "end_column": 16,
+    "annotation_level": "failure",
+    "title": "",
+    "message": "The variable 'note' is declared but never used",
+    "raw_details": ""
+  },
+  {
+    "path": "WarehouseStock.Core/VersionInfo.cs",
+    "blob_href": "https://github.com/237107-hub/WarehouseStock/blob/4d0381126817f23f203b8194a096a930364fcedc/WarehouseStock.Core/VersionInfo.cs",
+    "start_line": 12,
+    "start_column": 16,
+    "end_line": 12,
+    "end_column": 16,
+    "annotation_level": "failure",
+    "title": "",
+    "message": "The variable 'note' is declared but never used",
+    "raw_details": ""
+  },
+  {
+    "path": ".github",
+    "blob_href": "https://github.com/237107-hub/WarehouseStock/blob/4d0381126817f23f203b8194a096a930364fcedc/.github",
+    "start_line": 1,
+    "start_column": null,
+    "end_line": 1,
+    "end_column": null,
+    "annotation_level": "notice",
+    "title": "",
+    "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+    "raw_details": ""
+  }
+]

@@ -5,6 +5,7 @@ using WarehouseStock.App;
 using WarehouseStock.App.Diagnostics;
 using WarehouseStock.App.Infrastructure;
 using WarehouseStock.App.Input;
+using WarehouseStock.Core;
 using WarehouseStock.Core.Errors;
 using WarehouseStock.Core.Notifications;
 using WarehouseStock.Core.Pricing;
@@ -12,9 +13,16 @@ using WarehouseStock.Core.Services;
 using WarehouseStock.Core.Storage;
 
 Console.OutputEncoding = Encoding.UTF8;
+Console.WriteLine($"WarehouseStock v{VersionInfo.Current()}");
 if (OperatingSystem.IsWindows())
 {
-    Console.Title = args.Contains("--lab7", StringComparer.Ordinal) ? "WarehouseStock - ЛР7" : "WarehouseStock - ЛР5";
+    Console.Title = "WarehouseStock v" + VersionInfo.Current();
+}
+
+if (args.Contains("--lab8", StringComparer.Ordinal))
+{
+    Lab08Scenario.Run(Console.Out);
+    return 0;
 }
 
 if (args.Contains("--lab7", StringComparer.Ordinal))

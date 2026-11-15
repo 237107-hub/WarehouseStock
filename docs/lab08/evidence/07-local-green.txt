@@ -1,0 +1,47 @@
+$ powershell -NoProfile -ExecutionPolicy Bypass -File eng/quality.ps1 -NoRestore
+  WarehouseStock.Legacy -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\src\Legacy\bin\Release\net8.0\WarehouseStock.Legacy.dll
+  WarehouseStock.Legacy.Demo -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\src\Legacy.Demo\bin\Release\net8.0\WarehouseStock.Legacy.Demo.dll
+  WarehouseStock.Legacy.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\Legacy.Tests\bin\Release\net8.0\WarehouseStock.Legacy.Tests.dll
+  WarehouseStock.Core -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\WarehouseStock.Core\bin\Release\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.App -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\WarehouseStock.App\bin\Release\net8.0\WarehouseStock.App.dll
+  WarehouseStock.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\bin\Release\net8.0\WarehouseStock.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.50
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\Legacy.Tests\bin\Release\net8.0\WarehouseStock.Legacy.Tests.dll (.NETCoreApp,Version=v8.0)
+  [coverlet] _mapping file name: 'CoverletSourceRootsMapping_WarehouseStock.Tests'
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\bin\Release\net8.0\WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Results File: C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\artifacts\test-results\Макс_DESKTOP-5679RHT_2026-11-15_12_49_31.trx
+
+Passed!  - Failed:     0, Passed:    30, Skipped:     0, Total:    30, Duration: 110 ms - WarehouseStock.Legacy.Tests.dll (net8.0)
+Results File: C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\artifacts\test-results\Макс_DESKTOP-5679RHT_2026-11-15_12_49_31[1].trx
+
+Passed!  - Failed:     0, Passed:   116, Skipped:     0, Total:   116, Duration: 97 ms - WarehouseStock.Tests.dll (net8.0)
+  [coverlet] 
+  Calculating coverage result...
+   Generating report 'C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\coverage\coverage.cobertura.xml'
+
++---------------------+--------+--------+--------+
+| Module              | Line   | Branch | Method |
++---------------------+--------+--------+--------+
+| WarehouseStock.Core | 90.14% | 88.46% | 90.9%  |
++---------------------+--------+--------+--------+
+
++---------+--------+--------+--------+
+|         | Line   | Branch | Method |
++---------+--------+--------+--------+
+| Total   | 90.14% | 88.46% | 90.9%  |
++---------+--------+--------+--------+
+| Average | 90.14% | 88.46% | 90.9%  |
++---------+--------+--------+--------+

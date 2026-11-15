@@ -1,0 +1,88 @@
+{
+  "tests": 146,
+  "newTests": 24,
+  "coverage": {
+    "line-rate": "0.9014",
+    "branch-rate": "0.8845999999999999",
+    "version": "1.9",
+    "timestamp": "1794740092",
+    "lines-covered": "366",
+    "lines-valid": "406",
+    "branches-covered": "115",
+    "branches-valid": "130"
+  },
+  "vulnerablePackages": 0,
+  "outdated": [
+    {
+      "id": "Microsoft.Extensions.Logging.Abstractions",
+      "requestedVersion": "8.0.2",
+      "resolvedVersion": "8.0.2",
+      "latestVersion": "11.0.0"
+    },
+    {
+      "id": "StyleCop.Analyzers",
+      "requestedVersion": "1.2.0-beta.556",
+      "resolvedVersion": "1.2.0-beta.556",
+      "latestVersion": "1.3.180"
+    },
+    {
+      "id": "Microsoft.Extensions.Logging.Console",
+      "requestedVersion": "8.0.1",
+      "resolvedVersion": "8.0.1",
+      "latestVersion": "11.0.0"
+    },
+    {
+      "id": "coverlet.collector",
+      "requestedVersion": "6.0.4",
+      "resolvedVersion": "6.0.4",
+      "latestVersion": "10.1.0"
+    },
+    {
+      "id": "coverlet.msbuild",
+      "requestedVersion": "6.0.4",
+      "resolvedVersion": "6.0.4",
+      "latestVersion": "10.1.0"
+    },
+    {
+      "id": "Microsoft.NET.Test.Sdk",
+      "requestedVersion": "17.12.0",
+      "resolvedVersion": "17.12.0",
+      "latestVersion": "18.12.0"
+    },
+    {
+      "id": "xunit",
+      "requestedVersion": "2.9.2",
+      "resolvedVersion": "2.9.2",
+      "latestVersion": "2.9.3"
+    },
+    {
+      "id": "xunit.runner.visualstudio",
+      "requestedVersion": "2.8.2",
+      "resolvedVersion": "2.8.2",
+      "latestVersion": "4.0.1"
+    }
+  ],
+  "build": [
+    {
+      "configuration": "Debug",
+      "seconds": 1.3,
+      "bytes": 40448,
+      "optimize": false
+    },
+    {
+      "configuration": "Release",
+      "seconds": 1.33,
+      "bytes": 38912,
+      "optimize": true
+    }
+  ],
+  "gateCommits": {
+    "red": "4d0381126817f23f203b8194a096a930364fcedc",
+    "green": "d9dfe1dc5f74f7e8bcd830a2a3247fedc8af5f8f",
+    "remoteRuns": false
+  },
+  "remoteRuns": false,
+  "pullRequest": null,
+  "badgeLive": false,
+  "selfReviewComplete": true
+}

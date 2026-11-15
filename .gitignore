@@ -498,3 +498,11 @@ data/*.local.json
 # Lab07 generated coverage
 TestResults/
 coverage/
+
+# Local settings and secrets
+.idea/
+appsettings.Local.json
+*.secrets.json
+.env*
+
+artifacts/

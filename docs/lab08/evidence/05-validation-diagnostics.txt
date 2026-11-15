@@ -1,0 +1,13 @@
+$ dotnet test --no-restore -c Release -v:minimal
+  WarehouseStock.Legacy -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\src\Legacy\bin\Release\net8.0\WarehouseStock.Legacy.dll
+  WarehouseStock.Core -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\WarehouseStock.Core\bin\Release\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.Legacy.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\Legacy.Tests\bin\Release\net8.0\WarehouseStock.Legacy.Tests.dll
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\Legacy.Tests\bin\Release\net8.0\WarehouseStock.Legacy.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+  WarehouseStock.App -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\WarehouseStock.App\bin\Release\net8.0\WarehouseStock.App.dll
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\Lab08\BoundaryAndVersionTests.cs(90,39): error CA1861: Prefer 'static readonly' fields over constant array arguments if the called method is called repeatedly and is not mutating the passed array (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1861) [C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\WarehouseStock.Tests.csproj]
+
+Passed!  - Failed:     0, Passed:    30, Skipped:     0, Total:    30, Duration: 111 ms - WarehouseStock.Legacy.Tests.dll (net8.0)

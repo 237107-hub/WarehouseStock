@@ -6,12 +6,12 @@ namespace WarehouseStock.Legacy.Tests;
 
 public sealed class CharacterizationTests : IDisposable
 {
-    private readonly CultureInfo previous = CultureInfo.CurrentCulture;
-    private readonly LegacyTransferProcessor processor = new();
+    private readonly CultureInfo _previous = CultureInfo.CurrentCulture;
+    private readonly LegacyTransferProcessor _processor = new();
 
     public CharacterizationTests() => CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-    public void Dispose() => CultureInfo.CurrentCulture = previous;
+    public void Dispose() => CultureInfo.CurrentCulture = _previous;
 
     private static List<TransferItem> Items() => new()
     {
@@ -21,28 +21,28 @@ public sealed class CharacterizationTests : IDisposable
 
     [Fact]
     public void NullItemsWinOverOtherErrors() => Assert.Equal("ERR: null",
-        TestApi.Handle(processor, null, "bad", null));
+        TestApi.Handle(_processor, null, "bad", null));
 
     [Fact]
     public void EmptyItemsWinOverStateAndMail() => Assert.Equal("ERR: empty",
-        TestApi.Handle(processor, new(), "bad", null));
+        TestApi.Handle(_processor, new(), "bad", null));
 
     [Fact]
     public void StateWinsOverMail() => Assert.Equal("ERR: state",
-        TestApi.Handle(processor, Items(), "NEW", null));
+        TestApi.Handle(_processor, Items(), "NEW", null));
 
     [Theory]
     [InlineData(null)]
     [InlineData("invalid")]
     public void InvalidMail(string? mail) => Assert.Equal("ERR: mail",
-        TestApi.Handle(processor, Items(), mail: mail));
+        TestApi.Handle(_processor, Items(), mail: mail));
 
     [Fact]
     public void GoldenReport()
     {
         Assert.Equal("Документ #1001\nКлієнт: Іван\nA-1 x2 = 300.00 UAH\n" +
             "B-2 x1 = 400.00 UAH\nЗнижка: 105.00 UAH\nДоставка: 60.00 UAH\nРазом: 655.00 UAH\n",
-            TestApi.Handle(processor, Items()));
+            TestApi.Handle(_processor, Items()));
     }
 
     [Theory]
@@ -57,14 +57,14 @@ public sealed class CharacterizationTests : IDisposable
     [InlineData("staff", 100, "550")]
     public void RatesAndPriority(string kind, int done, string expected) =>
         Assert.Equal(decimal.Parse(expected, CultureInfo.InvariantCulture),
-            TestApi.Preview(processor, kind, done, Items()));
+            TestApi.Preview(_processor, kind, done, Items()));
 
     [Theory]
     [InlineData("vip")]
     [InlineData("staff")]
     [InlineData("regular")]
     public void DiscountCap(string kind) => Assert.Equal(19500m,
-        TestApi.Preview(processor, kind, 11, new() { new() { Qty = 1, Price = 20000m } }));
+        TestApi.Preview(_processor, kind, 11, new() { new() { Qty = 1, Price = 20000m } }));
 
     [Theory]
     [InlineData("1000", "1000")]
@@ -73,51 +73,51 @@ public sealed class CharacterizationTests : IDisposable
     [InlineData("-100", "-40")]
     public void ShippingBoundaryAndNegative(string price, string expected) =>
         Assert.Equal(decimal.Parse(expected, CultureInfo.InvariantCulture),
-            TestApi.Preview(processor, "regular", 0, new()
+            TestApi.Preview(_processor, "regular", 0, new()
             { new() { Qty = 1, Price = decimal.Parse(price, CultureInfo.InvariantCulture) } }));
 
     [Fact]
     public void NegativeDiscountIsPreserved() => Assert.Equal(-25m,
-        TestApi.Preview(processor, "vip", 0, new() { new() { Qty = -1, Price = 100m } }));
+        TestApi.Preview(_processor, "vip", 0, new() { new() { Qty = -1, Price = 100m } }));
 
     [Fact]
     public void EmptyPreviewStillChargesDelivery() => Assert.Equal(60m,
-        TestApi.Preview(processor, "regular", 0, new()));
+        TestApi.Preview(_processor, "regular", 0, new()));
 
     [Fact]
     public void NullPreviewThrows() => Assert.Throws<NullReferenceException>(() =>
-        TestApi.Preview(processor, "regular", 0, null!));
+        TestApi.Preview(_processor, "regular", 0, null!));
 
     [Fact]
     public void JournalOrderAndRejectedCall()
     {
-        Assert.Equal("", processor.DumpLog());
-        TestApi.Handle(processor, Items(), send: true);
-        TestApi.Handle(processor, null);
-        TestApi.Handle(processor, Items(), state: "paid");
-        Assert.Equal("ok 1001\nmail -> a@b\nok 1001\n", processor.DumpLog());
+        Assert.Equal("", _processor.DumpLog());
+        TestApi.Handle(_processor, Items(), send: true);
+        TestApi.Handle(_processor, null);
+        TestApi.Handle(_processor, Items(), state: "paid");
+        Assert.Equal("ok 1001\nmail -> a@b\nok 1001\n", _processor.DumpLog());
     }
 
     [Fact]
     public void DescribeUsesClockAndCulture() => Assert.Equal(
         "ІВАН [VIP] [ЛОЯЛЬНИЙ] <a@b> стаж " + (DateTime.Now.Year - 2020),
-        TestApi.Describe(processor, " Іван ", "vip", 11, "A@B"));
+        TestApi.Describe(_processor, " Іван ", "vip", 11, "A@B"));
 
     [Fact]
     public void DescribeBoundary() => Assert.Equal("USER <a@b> стаж " + (DateTime.Now.Year - 2020),
-        TestApi.Describe(processor, " user ", "staff", 10, "A@B"));
+        TestApi.Describe(_processor, " user ", "staff", 10, "A@B"));
 
     [Fact]
     public void CommaDecimalCultureIsPreserved()
     {
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("uk-UA");
-        Assert.Contains("Разом: 655,00 UAH\n", TestApi.Handle(processor, Items()));
+        Assert.Contains("Разом: 655,00 UAH\n", TestApi.Handle(_processor, Items()));
     }
 
     [Fact]
     public void TurkishCaseIsPreserved()
     {
         CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("tr-TR");
-        Assert.StartsWith("İ <ı@b>", TestApi.Describe(processor, "i", "regular", 0, "I@B"));
+        Assert.StartsWith("İ <ı@b>", TestApi.Describe(_processor, "i", "regular", 0, "I@B"));
     }
 }

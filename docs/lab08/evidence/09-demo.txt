@@ -1,0 +1,8 @@
+$ dotnet run --project WarehouseStock.App -c Release --no-build -- --lab8 --no-pause
+WarehouseStock v0.8.0
+ЛР8 / WarehouseStock / варіант 6
+SKU-1;2;10.50 -> OK 21.00
+SKU-1;0;10.50 -> REJECT
+SKU-1;1001;10.50 -> REJECT
+SKU-1;2;10,50 -> REJECT
+Локальні перевірки: eng/quality.ps1. GitHub Actions потребує публікації репозиторію.

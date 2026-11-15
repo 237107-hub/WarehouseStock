@@ -1,0 +1,128 @@
+$ dotnet list package --outdated --configfile C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\construction_lab8\outdated.config --format json
+{
+  "version": 1,
+  "parameters": "--outdated",
+  "sources": [
+    "http://127.0.0.1:64922/index.json"
+  ],
+  "projects": [
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/WarehouseStock.Core/WarehouseStock.Core.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.Extensions.Logging.Abstractions",
+              "requestedVersion": "8.0.2",
+              "resolvedVersion": "8.0.2",
+              "latestVersion": "11.0.0"
+            },
+            {
+              "id": "StyleCop.Analyzers",
+              "requestedVersion": "1.2.0-beta.556",
+              "resolvedVersion": "1.2.0-beta.556",
+              "latestVersion": "1.3.180"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/WarehouseStock.App/WarehouseStock.App.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.Extensions.Logging.Console",
+              "requestedVersion": "8.0.1",
+              "resolvedVersion": "8.0.1",
+              "latestVersion": "11.0.0"
+            },
+            {
+              "id": "StyleCop.Analyzers",
+              "requestedVersion": "1.2.0-beta.556",
+              "resolvedVersion": "1.2.0-beta.556",
+              "latestVersion": "1.3.180"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/tests/WarehouseStock.Tests/WarehouseStock.Tests.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": [
+            {
+              "id": "coverlet.collector",
+              "requestedVersion": "6.0.4",
+              "resolvedVersion": "6.0.4",
+              "latestVersion": "10.1.0"
+            },
+            {
+              "id": "coverlet.msbuild",
+              "requestedVersion": "6.0.4",
+              "resolvedVersion": "6.0.4",
+              "latestVersion": "10.1.0"
+            },
+            {
+              "id": "Microsoft.NET.Test.Sdk",
+              "requestedVersion": "17.12.0",
+              "resolvedVersion": "17.12.0",
+              "latestVersion": "18.12.0"
+            },
+            {
+              "id": "xunit",
+              "requestedVersion": "2.9.2",
+              "resolvedVersion": "2.9.2",
+              "latestVersion": "2.9.3"
+            },
+            {
+              "id": "xunit.runner.visualstudio",
+              "requestedVersion": "2.8.2",
+              "resolvedVersion": "2.8.2",
+              "latestVersion": "4.0.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/src/Legacy/WarehouseStock.Legacy.csproj"
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/tests/Legacy.Tests/WarehouseStock.Legacy.Tests.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.NET.Test.Sdk",
+              "requestedVersion": "17.12.0",
+              "resolvedVersion": "17.12.0",
+              "latestVersion": "18.12.0"
+            },
+            {
+              "id": "xunit",
+              "requestedVersion": "2.9.2",
+              "resolvedVersion": "2.9.2",
+              "latestVersion": "2.9.3"
+            },
+            {
+              "id": "xunit.runner.visualstudio",
+              "requestedVersion": "2.8.2",
+              "resolvedVersion": "2.8.2",
+              "latestVersion": "4.0.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/src/Legacy.Demo/WarehouseStock.Legacy.Demo.csproj"
+    }
+  ]
+}
