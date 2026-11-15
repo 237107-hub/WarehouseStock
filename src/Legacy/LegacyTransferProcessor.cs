@@ -27,25 +27,21 @@ public class LegacyTransferProcessor
     private decimal _tmpDiscount;
     private readonly List<string> _log = new();
 
-    public string Handle(int docId, int clientId,
-        string clientName, string? clientMail,
-        ClientKind clientKind, int clientDone,
-        List<TransferItem>? items, DocState state,
-        string currency, DateTime createdAt, bool sendMail)
+    public string Handle(TransferRequest request)
     {
-        string? error = Validate(items, state, clientMail);
+        string? error = Validate(request.Items, request.State, request.Client.Email);
         if (error != null) return error;
-        _log.Add("ok " + docId);
+        _log.Add("ok " + request.DocumentId);
 
-        _tmpSum = Subtotal(items!);
-        _tmpDiscount = DiscountPolicy.Calculate(_tmpSum, clientKind, clientDone);
+        _tmpSum = Subtotal(request.Items!);
+        _tmpDiscount = DiscountPolicy.Calculate(_tmpSum, request.Client.Kind, request.Client.DoneCount);
         decimal ship = ShippingPolicy.Calculate(_tmpSum - _tmpDiscount);
         decimal total = _tmpSum - _tmpDiscount + ship;
 
-        string txt = ReportBuilder.Build(docId, clientName, items!, currency, _tmpDiscount, ship, total);
-        if (sendMail)
+        string txt = ReportBuilder.Build(request.DocumentId, request.Client.Name, request.Items!, request.Currency, _tmpDiscount, ship, total);
+        if (request.SendMail)
         {
-            _log.Add("mail -> " + clientMail);
+            _log.Add("mail -> " + request.Client.Email);
         }
 
         return txt;
