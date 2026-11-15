@@ -38,21 +38,11 @@ public class LegacyTransferProcessor
         _log.Add("ok " + docId);
 
         _tmpSum = Subtotal(items!);
-        _tmpDiscount = DiscountOf(_tmpSum, clientKind, clientDone);
-        decimal ship = ShippingOf(_tmpSum - _tmpDiscount);
+        _tmpDiscount = DiscountPolicy.Calculate(_tmpSum, clientKind, clientDone);
+        decimal ship = ShippingPolicy.Calculate(_tmpSum - _tmpDiscount);
         decimal total = _tmpSum - _tmpDiscount + ship;
 
-        string txt = "Документ #" + docId + "\n";
-        txt += "Клієнт: " + clientName + "\n";
-        for (int i = 0; i < items!.Count; i++)
-        {
-            txt += items[i].Code + " x" + items[i].Qty + " = " +
-                (items[i].Qty * items[i].Price).ToString("0.00") + " " + currency + "\n";
-        }
-
-        txt += "Знижка: " + _tmpDiscount.ToString("0.00") + " " + currency + "\n";
-        txt += "Доставка: " + ship.ToString("0.00") + " " + currency + "\n";
-        txt += "Разом: " + total.ToString("0.00") + " " + currency + "\n";
+        string txt = ReportBuilder.Build(docId, clientName, items!, currency, _tmpDiscount, ship, total);
         if (sendMail)
         {
             _log.Add("mail -> " + clientMail);
@@ -77,40 +67,11 @@ public class LegacyTransferProcessor
         return sum;
     }
 
-    private static decimal DiscountOf(decimal subtotal, ClientKind clientKind, int clientDone)
-    {
-        decimal discount = 0m;
-        if (clientKind == ClientKind.Vip)
-        {
-            discount = subtotal * PricingRules.VipRate;
-            if (discount > PricingRules.MaximumDiscount) discount = PricingRules.MaximumDiscount;
-        }
-        else if (clientKind == ClientKind.Staff)
-        {
-            discount = subtotal * PricingRules.StaffRate;
-            if (discount > PricingRules.MaximumDiscount) discount = PricingRules.MaximumDiscount;
-        }
-        else if (clientDone > PricingRules.LoyaltyThreshold)
-        {
-            discount = subtotal * PricingRules.LoyalRate;
-            if (discount > PricingRules.MaximumDiscount) discount = PricingRules.MaximumDiscount;
-        }
-
-        return discount;
-    }
-
-    private static decimal ShippingOf(decimal payable)
-    {
-        decimal ship = 0m;
-        if (payable < PricingRules.FreeShippingThreshold) ship = PricingRules.DeliveryFee;
-        return ship;
-    }
-
     public decimal Preview(ClientKind clientKind, int clientDone, List<TransferItem> items)
     {
         decimal sum = Subtotal(items);
-        decimal discount = DiscountOf(sum, clientKind, clientDone);
-        return sum - discount + ShippingOf(sum - discount);
+        decimal discount = DiscountPolicy.Calculate(sum, clientKind, clientDone);
+        return sum - discount + ShippingPolicy.Calculate(sum - discount);
     }
 
     public string DescribeClient(WarehouseClient c)
