@@ -11,6 +11,17 @@ public class WarehouseClient
     public ClientKind Kind { get; set; } = ClientKind.Regular;
     public int DoneCount { get; set; }
     public DateTime SinceUtc { get; set; }
+
+    public string Describe()
+    {
+        string s = Name.Trim().ToUpper(System.Globalization.CultureInfo.CurrentCulture);
+        if (Kind == ClientKind.Vip) s += " [VIP]";
+        if (DoneCount > PricingRules.LoyaltyThreshold) s += " [ЛОЯЛЬНИЙ]";
+        s += " <" + Email.ToLower(System.Globalization.CultureInfo.CurrentCulture) + ">";
+        int years = DateTime.Now.Year - SinceUtc.Year;
+        s += " стаж " + years;
+        return s;
+    }
 }
 
 public class TransferItem
@@ -68,17 +79,6 @@ public class LegacyTransferProcessor
         decimal sum = Subtotal(items);
         decimal discount = DiscountPolicy.Calculate(sum, clientKind, clientDone);
         return sum - discount + ShippingPolicy.Calculate(sum - discount);
-    }
-
-    public string DescribeClient(WarehouseClient c)
-    {
-        string s = c.Name.Trim().ToUpper();
-        if (c.Kind == ClientKind.Vip) s += " [VIP]";
-        if (c.DoneCount > PricingRules.LoyaltyThreshold) s += " [ЛОЯЛЬНИЙ]";
-        s += " <" + c.Email.ToLower() + ">";
-        int years = DateTime.Now.Year - c.SinceUtc.Year;
-        s += " стаж " + years;
-        return s;
     }
 
     public string DumpLog()

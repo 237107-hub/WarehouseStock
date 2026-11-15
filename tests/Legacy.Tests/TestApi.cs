@@ -18,6 +18,6 @@ internal static class TestApi
         List<TransferItem> items) => processor.Preview(LegacyCodes.Client(kind), done, items);
 
     internal static string Describe(LegacyTransferProcessor processor, string name,
-        string kind, int done, string email) => processor.DescribeClient(new WarehouseClient
-        { Name = name, Kind = LegacyCodes.Client(kind), DoneCount = done, Email = email, SinceUtc = new DateTime(2020, 1, 1) });
+        string kind, int done, string email) => (new WarehouseClient
+        { Name = name, Kind = LegacyCodes.Client(kind), DoneCount = done, Email = email, SinceUtc = new DateTime(2020, 1, 1) }).Describe();
 }

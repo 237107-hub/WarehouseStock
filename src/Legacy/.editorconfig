@@ -1,5 +1,3 @@
 # Compatibility baseline: exact methodic source; remove exemptions as refactoring permits.
 [*.cs]
-dotnet_diagnostic.CA1304.severity = none
-dotnet_diagnostic.CA1311.severity = none
 dotnet_diagnostic.CA1822.severity = none
