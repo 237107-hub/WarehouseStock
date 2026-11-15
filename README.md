@@ -4,14 +4,18 @@
 
 Навчальний проєкт WarehouseStock, варіант 6, група 471. Репозиторій: https://github.com/237107-hub/WarehouseStock
 
-ЛР5, ЛР6 та ЛР7 опубліковано у відповідних гілках і тегах. Для ЛР8 зафіксовано реальний червоний Actions на навмисному CS0168; виправлена гілка проходить перевірку перед PR.
+ЛР5, ЛР6 та ЛР7 опубліковано у відповідних гілках і тегах. Для ЛР8 зафіксовано червоний Actions на CS0168 та зелений після виправлення. PR #1 об’єднано, Actions main пройшов.
 
 - Червоний запуск: https://github.com/237107-hub/WarehouseStock/actions/runs/43712245001
 - ЛР5: https://github.com/237107-hub/WarehouseStock/tree/lab05-error-handling
 - ЛР6: https://github.com/237107-hub/WarehouseStock/tree/lab6-refactoring
 - ЛР7: https://github.com/237107-hub/WarehouseStock/tree/lab07-tests
 
-Бейдж відстежує main і покаже його результат після злиття workflow. Зелений запуск і PR додаються після фактичного завершення, а не за локальним логом.
+Бейдж відстежує main. PR: https://github.com/237107-hub/WarehouseStock/pull/1
+
+Зелений main: https://github.com/237107-hub/WarehouseStock/actions/runs/43714954711
+
+Зелений після виправлення: https://github.com/237107-hub/WarehouseStock/actions/runs/43713370650
 
 
 

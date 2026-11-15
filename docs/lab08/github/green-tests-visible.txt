@@ -1,0 +1,134 @@
+Annotations
+1 notice
+quality
+succeeded  in 39s
+Set up job
+1s
+Checkout
+1s
+Install SDK and NET 8 runtime
+6s
+Restore locked dependencies and audit
+7s
+Verify formatting and analyzers
+9s
+Build Release
+4s
+Tests and Core coverage gate
+6s
+1
+Run dotnet test -c Release --no-build --no-restore --logger trx --results-directory artifacts/test-results /p:CollectCoverage=true /p:CoverletOutput=./coverage/ /p:CoverletOutputFormat=cobertura /p:Include="[WarehouseStock.Core]*" /p:ExcludeByAttribute=GeneratedCodeAttribute%2cCompilerGeneratedAttribute /p:Threshold=80 /p:ThresholdType=line
+
+9
+Test run for /home/runner/work/WarehouseStock/WarehouseStock/tests/Legacy.Tests/bin/Release/net8.0/WarehouseStock.Legacy.Tests.dll (.NETCoreApp,Version=v8.0)
+
+10
+VSTest version 17.14.1 (x64)
+
+11
+
+
+12
+  [coverlet] _mapping file name: 'CoverletSourceRootsMapping_WarehouseStock.Tests'
+
+13
+Starting test execution, please wait...
+
+14
+A total of 1 test files matched the specified pattern.
+
+15
+Test run for /home/runner/work/WarehouseStock/WarehouseStock/tests/WarehouseStock.Tests/bin/Release/net8.0/WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+
+16
+VSTest version 17.14.1 (x64)
+
+17
+
+
+18
+Starting test execution, please wait...
+
+19
+A total of 1 test files matched the specified pattern.
+
+20
+Results File: /home/runner/work/WarehouseStock/WarehouseStock/artifacts/test-results/_runnervmccnms_2026-11-15_12_21_28.trx
+
+21
+
+
+22
+Passed!  - Failed:     0, Passed:    30, Skipped:     0, Total:    30, Duration: 117 ms - WarehouseStock.Legacy.Tests.dll (net8.0)
+
+23
+Results File: /home/runner/work/WarehouseStock/WarehouseStock/artifacts/test-results/_runnervmccnms_2026-11-15_12_21_28[1].trx
+
+24
+
+
+25
+Passed!  - Failed:     0, Passed:   116, Skipped:     0, Total:   116, Duration: 192 ms - WarehouseStock.Tests.dll (net8.0)
+
+26
+  [coverlet] 
+
+27
+  Calculating coverage result...
+
+28
+   Generating report '/home/runner/work/WarehouseStock/WarehouseStock/tests/WarehouseStock.Tests/coverage/coverage.cobertura.xml'
+
+29
+
+
+30
++---------------------+--------+--------+--------+
+
+31
+| Module              | Line   | Branch | Method |
+
+32
++---------------------+--------+--------+--------+
+
+33
+| WarehouseStock.Core | 90.14% | 88.46% | 90.9%  |
+
+34
++---------------------+--------+--------+--------+
+
+35
+
+
+36
++---------+--------+--------+--------+
+
+37
+|         | Line   | Branch | Method |
+
+38
++---------+--------+--------+--------+
+
+39
+| Total   | 90.14% | 88.46% | 90.9%  |
+
+40
++---------+--------+--------+--------+
+
+41
+| Average | 90.14% | 88.46% | 90.9%  |
+
+42
++---------+--------+--------+--------+
+
+43
+
+
+Upload test results and coverage
+1s
+Post Install SDK and NET 8 runtime
+0s
+Post Checkout
+0s
+Complete job
+0s

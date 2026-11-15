@@ -1,0 +1,121 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 132809577400,
+      "run_id": 43713370650,
+      "workflow_name": "CI",
+      "head_branch": "feature/ci-pipeline",
+      "run_url": "https://api.github.com/repos/237107-hub/WarehouseStock/actions/runs/43713370650",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVvJ8G88AAAAe7BFTuA",
+      "head_sha": "38afe468c655f36e557ef6f7b1225e238c974ef2",
+      "url": "https://api.github.com/repos/237107-hub/WarehouseStock/actions/jobs/132809577400",
+      "html_url": "https://github.com/237107-hub/WarehouseStock/actions/runs/43713370650/job/132809577400",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-15T12:20:52Z",
+      "started_at": "2026-11-15T12:20:54Z",
+      "completed_at": "2026-11-15T12:21:33Z",
+      "name": "quality",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-15T12:20:55Z",
+          "completed_at": "2026-11-15T12:20:56Z"
+        },
+        {
+          "name": "Checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-15T12:20:56Z",
+          "completed_at": "2026-11-15T12:20:57Z"
+        },
+        {
+          "name": "Install SDK and NET 8 runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-15T12:20:57Z",
+          "completed_at": "2026-11-15T12:21:03Z"
+        },
+        {
+          "name": "Restore locked dependencies and audit",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-15T12:21:03Z",
+          "completed_at": "2026-11-15T12:21:10Z"
+        },
+        {
+          "name": "Verify formatting and analyzers",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-15T12:21:10Z",
+          "completed_at": "2026-11-15T12:21:19Z"
+        },
+        {
+          "name": "Build Release",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-15T12:21:19Z",
+          "completed_at": "2026-11-15T12:21:23Z"
+        },
+        {
+          "name": "Tests and Core coverage gate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-15T12:21:23Z",
+          "completed_at": "2026-11-15T12:21:29Z"
+        },
+        {
+          "name": "Upload test results and coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-11-15T12:21:29Z",
+          "completed_at": "2026-11-15T12:21:30Z"
+        },
+        {
+          "name": "Post Install SDK and NET 8 runtime",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-11-15T12:21:30Z",
+          "completed_at": "2026-11-15T12:21:30Z"
+        },
+        {
+          "name": "Post Checkout",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-11-15T12:21:30Z",
+          "completed_at": "2026-11-15T12:21:30Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-11-15T12:21:30Z",
+          "completed_at": "2026-11-15T12:21:30Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/237107-hub/WarehouseStock/check-runs/132809577400",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000023,
+      "runner_name": "GitHub Actions 1000000023",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}
