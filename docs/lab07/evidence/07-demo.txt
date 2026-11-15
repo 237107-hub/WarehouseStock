@@ -1,0 +1,10 @@
+$ dotnet run --project WarehouseStock.App -c Release --no-build -- --lab7 --no-pause
+ЛР7 / WarehouseStock / варіант 6
+Знижка постійному одержувачу: 5% + 10% від 1000; стеля 150 грн.
+0.00 -> 0.00 UAH
+400.00 -> 20.00 UAH
+999.99 -> 50.00 UAH
+1000.00 -> 150.00 UAH
+1000.04 -> 150.00 UAH
+5000.00 -> 150.00 UAH
+Тести: dotnet test. Звіт покриття: Coverage/after/index.html.

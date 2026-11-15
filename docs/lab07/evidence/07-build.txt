@@ -1,0 +1,13 @@
+$ dotnet build -c Release --no-restore -t:Rebuild -v:minimal
+  WarehouseStock.Legacy -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\src\Legacy\bin\Release\net8.0\WarehouseStock.Legacy.dll
+  WarehouseStock.Core -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\WarehouseStock.Core\bin\Release\net8.0\WarehouseStock.Core.dll
+  WarehouseStock.Legacy.Demo -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\src\Legacy.Demo\bin\Release\net8.0\WarehouseStock.Legacy.Demo.dll
+  WarehouseStock.Legacy.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\Legacy.Tests\bin\Release\net8.0\WarehouseStock.Legacy.Tests.dll
+  WarehouseStock.App -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\WarehouseStock.App\bin\Release\net8.0\WarehouseStock.App.dll
+  WarehouseStock.Tests -> C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab7\WarehouseStock\tests\WarehouseStock.Tests\bin\Release\net8.0\WarehouseStock.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.63

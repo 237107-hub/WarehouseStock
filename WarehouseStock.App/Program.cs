@@ -14,7 +14,13 @@ using WarehouseStock.Core.Storage;
 Console.OutputEncoding = Encoding.UTF8;
 if (OperatingSystem.IsWindows())
 {
-    Console.Title = "WarehouseStock - ЛР5";
+    Console.Title = args.Contains("--lab7", StringComparer.Ordinal) ? "WarehouseStock - ЛР7" : "WarehouseStock - ЛР5";
+}
+
+if (args.Contains("--lab7", StringComparer.Ordinal))
+{
+    Lab07Scenario.Run(Console.Out);
+    return 0;
 }
 
 using ILoggerFactory factory = LoggerFactory.Create(builder =>
