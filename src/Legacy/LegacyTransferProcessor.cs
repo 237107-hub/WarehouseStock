@@ -34,8 +34,6 @@ public class TransferItem
 
 public class LegacyTransferProcessor
 {
-    private decimal _tmpSum;
-    private decimal _tmpDiscount;
     private readonly List<string> _log = new();
 
     public string Handle(TransferRequest request)
@@ -44,12 +42,12 @@ public class LegacyTransferProcessor
         if (error != null) return error;
         _log.Add("ok " + request.DocumentId);
 
-        _tmpSum = Subtotal(request.Items!);
-        _tmpDiscount = DiscountPolicy.Calculate(_tmpSum, request.Client.Kind, request.Client.DoneCount);
-        decimal ship = ShippingPolicy.Calculate(_tmpSum - _tmpDiscount);
-        decimal total = _tmpSum - _tmpDiscount + ship;
+        decimal subtotal = Subtotal(request.Items!);
+        decimal discount = DiscountPolicy.Calculate(subtotal, request.Client.Kind, request.Client.DoneCount);
+        decimal ship = ShippingPolicy.Calculate(subtotal - discount);
+        decimal total = subtotal - discount + ship;
 
-        string txt = ReportBuilder.Build(request.DocumentId, request.Client.Name, request.Items!, request.Currency, _tmpDiscount, ship, total);
+        string txt = ReportBuilder.Build(request.DocumentId, request.Client.Name, request.Items!, request.Currency, discount, ship, total);
         if (request.SendMail)
         {
             _log.Add("mail -> " + request.Client.Email);
