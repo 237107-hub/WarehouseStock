@@ -4,88 +4,41 @@ namespace WarehouseStock.Tests.Lab07;
 
 public sealed class TransferDiscountPolicyTests
 {
-    [Fact]
-    public void DiscountFor_ZeroAmount_ReturnsZero()
+    [Theory]
+    [InlineData(0, false, 0)]
+    [InlineData(400, true, 20)]
+    [InlineData(999.99, false, 0)]
+    [InlineData(999.99, true, 50)]
+    [InlineData(1000, false, 100)]
+    [InlineData(1000, true, 150)]
+    [InlineData(1000.01, false, 100)]
+    [InlineData(0.1, true, 0)]
+    [InlineData(0.3, true, 0.02)]
+    public void DiscountFor_Boundaries_MatchesTable(double amount, bool isRegular, double expected)
     {
         // Arrange
-        decimal amount = 0m;
-        bool isRegular = false;
+        decimal value = (decimal)amount;
 
         // Act
-        decimal actual = TransferDiscountPolicy.DiscountFor(amount, isRegular);
+        decimal actual = TransferDiscountPolicy.DiscountFor(value, isRegular);
 
         // Assert
-        Assert.Equal(0m, actual);
+        Assert.Equal((decimal)expected, actual);
     }
 
-    [Fact]
-    public void DiscountFor_SmallRegular_ReturnsFivePercent()
+    [Theory]
+    [InlineData(-0.01)]
+    [InlineData(-1000)]
+    public void DiscountFor_NegativeAmount_ThrowsOutOfRange(double amount)
     {
         // Arrange
-        decimal amount = 400m;
-        bool isRegular = true;
+        decimal value = (decimal)amount;
 
         // Act
-        decimal actual = TransferDiscountPolicy.DiscountFor(amount, isRegular);
+        var error = Assert.Throws<ArgumentOutOfRangeException>(
+            () => TransferDiscountPolicy.DiscountFor(value, true));
 
         // Assert
-        Assert.Equal(20m, actual);
+        Assert.Equal("amount", error.ParamName);
     }
-
-    [Fact]
-    public void DiscountFor_BelowBulkNew_ReturnsZero()
-    {
-        // Arrange
-        decimal amount = 999.99m;
-        bool isRegular = false;
-
-        // Act
-        decimal actual = TransferDiscountPolicy.DiscountFor(amount, isRegular);
-
-        // Assert
-        Assert.Equal(0m, actual);
-    }
-
-    [Fact]
-    public void DiscountFor_BelowBulkRegular_ReturnsFifty()
-    {
-        // Arrange
-        decimal amount = 999.99m;
-        bool isRegular = true;
-
-        // Act
-        decimal actual = TransferDiscountPolicy.DiscountFor(amount, isRegular);
-
-        // Assert
-        Assert.Equal(50m, actual);
-    }
-
-    [Fact]
-    public void DiscountFor_BulkBoundaryNew_ReturnsHundred()
-    {
-        // Arrange
-        decimal amount = 1000m;
-        bool isRegular = false;
-
-        // Act
-        decimal actual = TransferDiscountPolicy.DiscountFor(amount, isRegular);
-
-        // Assert
-        Assert.Equal(100m, actual);
-    }
-
-    [Fact]
-    public void DiscountFor_BulkBoundaryRegular_ReturnsHundredFifty()
-    {
-        // Arrange
-        decimal amount = 1000m;
-        bool isRegular = true;
-
-        // Act
-        decimal actual = TransferDiscountPolicy.DiscountFor(amount, isRegular);
-
-        // Assert
-        Assert.Equal(150m, actual);
-    }
-
 }
