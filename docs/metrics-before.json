@@ -1,0 +1,174 @@
+[
+  {
+    "file": "C:\\Users\\\u041C\u0430\u043A\u0441\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+    "name": "Handle",
+    "cc": 17,
+    "ifs": 12,
+    "loops": 2,
+    "logical": 2,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 11,
+    "returns": 5,
+    "depth": 4,
+    "loc": 75,
+    "physicalBodyLines": 74,
+    "conditions": [
+      {
+        "line": 36,
+        "text": "items != null"
+      },
+      {
+        "line": 38,
+        "text": "items.Count \u003E 0"
+      },
+      {
+        "line": 40,
+        "text": "state == \u0022new\u0022 || state == \u0022paid\u0022"
+      },
+      {
+        "line": 42,
+        "text": "clientMail != null \u0026\u0026 clientMail.Contains(\u0022@\u0022)"
+      },
+      {
+        "line": 67,
+        "text": "i \u003C items.Count"
+      },
+      {
+        "line": 73,
+        "text": "clientKind == \u0022vip\u0022"
+      },
+      {
+        "line": 76,
+        "text": "_tmpDiscount \u003E 500m"
+      },
+      {
+        "line": 78,
+        "text": "clientKind == \u0022staff\u0022"
+      },
+      {
+        "line": 81,
+        "text": "_tmpDiscount \u003E 500m"
+      },
+      {
+        "line": 83,
+        "text": "clientDone \u003E 10"
+      },
+      {
+        "line": 86,
+        "text": "_tmpDiscount \u003E 500m"
+      },
+      {
+        "line": 90,
+        "text": "_tmpSum - _tmpDiscount \u003C 1000m"
+      },
+      {
+        "line": 95,
+        "text": "i \u003C items.Count"
+      },
+      {
+        "line": 104,
+        "text": "sendMail"
+      }
+    ]
+  },
+  {
+    "file": "C:\\Users\\\u041C\u0430\u043A\u0441\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+    "name": "Preview",
+    "cc": 9,
+    "ifs": 7,
+    "loops": 1,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 3,
+    "returns": 1,
+    "depth": 2,
+    "loc": 27,
+    "physicalBodyLines": 26,
+    "conditions": [
+      {
+        "line": 115,
+        "text": "items"
+      },
+      {
+        "line": 121,
+        "text": "clientKind == \u0022vip\u0022"
+      },
+      {
+        "line": 124,
+        "text": "d \u003E 500m"
+      },
+      {
+        "line": 126,
+        "text": "clientKind == \u0022staff\u0022"
+      },
+      {
+        "line": 129,
+        "text": "d \u003E 500m"
+      },
+      {
+        "line": 131,
+        "text": "clientDone \u003E 10"
+      },
+      {
+        "line": 134,
+        "text": "d \u003E 500m"
+      },
+      {
+        "line": 138,
+        "text": "s - d \u003C 1000m"
+      }
+    ]
+  },
+  {
+    "file": "C:\\Users\\\u041C\u0430\u043A\u0441\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+    "name": "DescribeClient",
+    "cc": 3,
+    "ifs": 2,
+    "loops": 0,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 1,
+    "returns": 1,
+    "depth": 1,
+    "loc": 10,
+    "physicalBodyLines": 7,
+    "conditions": [
+      {
+        "line": 145,
+        "text": "c.Kind == \u0022vip\u0022"
+      },
+      {
+        "line": 146,
+        "text": "c.DoneCount \u003E 10"
+      }
+    ]
+  },
+  {
+    "file": "C:\\Users\\\u041C\u0430\u043A\u0441\\Documents\\Codex\\2026-11-10\\new-chat\\outputs\\construction_lab6\\WarehouseStock\\src\\Legacy\\LegacyTransferProcessor.cs",
+    "name": "DumpLog",
+    "cc": 2,
+    "ifs": 0,
+    "loops": 1,
+    "logical": 0,
+    "ternary": 0,
+    "arms": 0,
+    "guards": 0,
+    "parameters": 0,
+    "returns": 1,
+    "depth": 1,
+    "loc": 6,
+    "physicalBodyLines": 3,
+    "conditions": [
+      {
+        "line": 156,
+        "text": "_log"
+      }
+    ]
+  }
+]
