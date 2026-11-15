@@ -41,4 +41,16 @@ public sealed class TransferDiscountPolicyTests
         // Assert
         Assert.Equal("amount", error.ParamName);
     }
+    [Fact]
+    public void DiscountFor_HugeShipment_IsCappedAtMaximum()
+    {
+        // Arrange
+        decimal amount = 5000m;
+
+        // Act
+        decimal actual = TransferDiscountPolicy.DiscountFor(amount, true);
+
+        // Assert
+        Assert.Equal(150m, actual);
+    }
 }
