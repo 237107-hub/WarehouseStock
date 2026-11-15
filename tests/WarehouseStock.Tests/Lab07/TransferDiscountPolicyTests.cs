@@ -12,6 +12,8 @@ public sealed class TransferDiscountPolicyTests
     [InlineData(1000, false, 100)]
     [InlineData(1000, true, 150)]
     [InlineData(1000.01, false, 100)]
+    [InlineData(1000.01, true, 150)]
+    [InlineData(1000.04, true, 150)]
     [InlineData(0.1, true, 0)]
     [InlineData(0.3, true, 0.02)]
     public void DiscountFor_Boundaries_MatchesTable(double amount, bool isRegular, double expected)

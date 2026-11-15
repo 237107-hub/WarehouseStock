@@ -21,28 +21,27 @@ public static class TransferDiscountPolicy
     /// <returns>Сума знижки.</returns>
     public static decimal DiscountFor(decimal amount, bool isRegular)
     {
+        EnsureAmountIsValid(amount);
+        decimal raw = amount * RateFor(amount, isRegular);
+        return Math.Min(decimal.Round(raw, 2), MaximumDiscount);
+    }
+
+    private static void EnsureAmountIsValid(decimal amount)
+    {
         if (amount < 0m)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Сума не може бути від’ємною.");
         }
+    }
 
-        decimal rate = 0m;
-        if (isRegular)
-        {
-            rate += RegularRate;
-        }
-
+    private static decimal RateFor(decimal amount, bool isRegular)
+    {
+        decimal rate = isRegular ? RegularRate : 0m;
         if (amount >= BulkFrom)
         {
             rate += BulkRate;
         }
 
-        decimal discount = decimal.Round(amount * rate, 2);
-        if (discount > MaximumDiscount)
-        {
-            discount = MaximumDiscount;
-        }
-
-        return discount;
+        return rate;
     }
 }
