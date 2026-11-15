@@ -16,7 +16,7 @@ Console.OutputEncoding = Encoding.UTF8;
 Console.WriteLine($"WarehouseStock v{VersionInfo.Current()}");
 if (OperatingSystem.IsWindows())
 {
-    Console.Title = args.Contains("--lab7", StringComparer.Ordinal) ? "WarehouseStock - ЛР7" : "WarehouseStock - ЛР5";
+    Console.Title = "WarehouseStock v" + VersionInfo.Current();
 }
 
 if (args.Contains("--lab8", StringComparer.Ordinal))
