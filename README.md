@@ -1,3 +1,9 @@
+# WarehouseStock 0.8.0
+
+ЛР8: локальні перевірки пройдено; GitHub Actions ще не запускався. Деталі: README_LAB8.md.
+
+<!-- Add the real CI badge after publishing; see README_LAB8.md. -->
+
 # WarehouseStock — лабораторна робота 5
 
 Обробка помилок, винятків і логування.

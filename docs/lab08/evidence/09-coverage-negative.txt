@@ -1,0 +1,30 @@
+$ dotnet test tests/WarehouseStock.Tests -c Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutput=./coverage/ /p:CoverletOutputFormat=cobertura /p:Include=[WarehouseStock.Core]* /p:ExcludeByAttribute=GeneratedCodeAttribute%2cCompilerGeneratedAttribute /p:Threshold=99 /p:ThresholdType=line
+  [coverlet] _mapping file name: 'CoverletSourceRootsMapping_WarehouseStock.Tests'
+Test run for C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\bin\Release\net8.0\WarehouseStock.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:   116, Skipped:     0, Total:   116, Duration: 38 ms - WarehouseStock.Tests.dll (net8.0)
+  [coverlet] 
+  Calculating coverage result...
+   Generating report 'C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\coverage\coverage.cobertura.xml'
+
++---------------------+--------+--------+--------+
+| Module              | Line   | Branch | Method |
++---------------------+--------+--------+--------+
+| WarehouseStock.Core | 90.14% | 88.46% | 90.9%  |
++---------------------+--------+--------+--------+
+
++---------+--------+--------+--------+
+|         | Line   | Branch | Method |
++---------+--------+--------+--------+
+| Total   | 90.14% | 88.46% | 90.9%  |
++---------+--------+--------+--------+
+| Average | 90.14% | 88.46% | 90.9%  |
++---------+--------+--------+--------+
+
+C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\lab3-nuget\coverlet.msbuild\6.0.4\build\coverlet.msbuild.targets(72,5): error : The minimum line coverage is below the specified 99 [C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\WarehouseStock.Tests.csproj]
+C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\lab3-nuget\coverlet.msbuild\6.0.4\build\coverlet.msbuild.targets(72,5): error :  [C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\WarehouseStock.Tests.csproj]
+C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\lab3-nuget\coverlet.msbuild\6.0.4\build\coverlet.msbuild.targets(72,5): error :    at Coverlet.MSbuild.Tasks.CoverageResultTask.Execute() in /_/src/coverlet.msbuild.tasks/CoverageResultTask.cs:line 251 [C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\outputs\construction_lab8\WarehouseStock\tests\WarehouseStock.Tests\WarehouseStock.Tests.csproj]

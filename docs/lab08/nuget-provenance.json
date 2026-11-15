@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://api.nuget.org/v3-vulnerabilities/2026.11.14.05.29.55/vulnerability.base.json",
+    "sha256": "290f263aff7519b36e1beb86c315334f3dadb4783152b91c360d17164c4a628b",
+    "bytes": 842176,
+    "retrievedUtc": "2026-11-15T10:50:03.951423+00:00"
+  },
+  {
+    "url": "https://api.nuget.org/v3-vulnerabilities/2026.11.14.05.29.55/2026.11.14.05.29.55/vulnerability.update.json",
+    "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "bytes": 2,
+    "retrievedUtc": "2026-11-15T10:50:03.951423+00:00"
+  }
+]

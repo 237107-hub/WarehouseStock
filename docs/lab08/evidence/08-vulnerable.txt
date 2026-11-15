@@ -1,0 +1,64 @@
+$ dotnet list package --vulnerable --include-transitive --configfile C:\Users\Макс\Documents\Codex\2026-11-10\new-chat\work\construction_lab8\local-audit.config --format json
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "http://127.0.0.1:64922/index.json"
+  ],
+  "projects": [
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/WarehouseStock.Core/WarehouseStock.Core.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": []
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/WarehouseStock.App/WarehouseStock.App.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": []
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/tests/WarehouseStock.Tests/WarehouseStock.Tests.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": []
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/src/Legacy/WarehouseStock.Legacy.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": []
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/tests/Legacy.Tests/WarehouseStock.Legacy.Tests.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": []
+        }
+      ]
+    },
+    {
+      "path": "C:/Users/Макс/Documents/Codex/2026-11-10/new-chat/outputs/construction_lab8/WarehouseStock/src/Legacy.Demo/WarehouseStock.Legacy.Demo.csproj",
+      "frameworks": [
+        {
+          "framework": "net8.0",
+          "topLevelPackages": []
+        }
+      ]
+    }
+  ]
+}
