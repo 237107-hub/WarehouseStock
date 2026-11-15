@@ -494,3 +494,7 @@ data/*.local.json
 *.log
 *.audit
 **/data/
+
+# Lab07 generated coverage
+TestResults/
+coverage/
