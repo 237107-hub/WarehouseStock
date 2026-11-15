@@ -19,6 +19,12 @@ if (OperatingSystem.IsWindows())
     Console.Title = args.Contains("--lab7", StringComparer.Ordinal) ? "WarehouseStock - ЛР7" : "WarehouseStock - ЛР5";
 }
 
+if (args.Contains("--lab8", StringComparer.Ordinal))
+{
+    Lab08Scenario.Run(Console.Out);
+    return 0;
+}
+
 if (args.Contains("--lab7", StringComparer.Ordinal))
 {
     Lab07Scenario.Run(Console.Out);
