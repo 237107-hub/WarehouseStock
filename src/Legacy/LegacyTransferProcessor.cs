@@ -5,20 +5,20 @@ namespace WarehouseStock.Legacy;
 
 public class WarehouseClient
 {
-    public int Id;
-    public string Name = "";
-    public string Email = "";
-    public string Kind = "regular";
-    public int DoneCount;
-    public DateTime SinceUtc;
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
+    public string Email { get; set; } = "";
+    public ClientKind Kind { get; set; } = ClientKind.Regular;
+    public int DoneCount { get; set; }
+    public DateTime SinceUtc { get; set; }
 }
 
 public class TransferItem
 {
-    public string Code = "";
-    public int Qty;
-    public decimal Price;
-    public string Group = "";
+    public string Code { get; set; } = "";
+    public int Qty { get; set; }
+    public decimal Price { get; set; }
+    public string Group { get; set; } = "";
 }
 
 public class LegacyTransferProcessor
@@ -29,15 +29,15 @@ public class LegacyTransferProcessor
 
     public string Handle(int docId, int clientId,
         string clientName, string? clientMail,
-        string clientKind, int clientDone,
-        List<TransferItem>? items, string state,
+        ClientKind clientKind, int clientDone,
+        List<TransferItem>? items, DocState state,
         string currency, DateTime createdAt, bool sendMail)
     {
         if (items != null)
         {
             if (items.Count > 0)
             {
-                if (state == "new" || state == "paid")
+                if (state == DocState.New || state == DocState.Paid)
                 {
                     if (clientMail != null && clientMail.Contains("@"))
                     {
@@ -70,12 +70,12 @@ public class LegacyTransferProcessor
         }
 
         _tmpDiscount = 0m;
-        if (clientKind == "vip")
+        if (clientKind == ClientKind.Vip)
         {
             _tmpDiscount = _tmpSum * PricingRules.VipRate;
             if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
         }
-        else if (clientKind == "staff")
+        else if (clientKind == ClientKind.Staff)
         {
             _tmpDiscount = _tmpSum * PricingRules.StaffRate;
             if (_tmpDiscount > PricingRules.MaximumDiscount) _tmpDiscount = PricingRules.MaximumDiscount;
@@ -109,7 +109,7 @@ public class LegacyTransferProcessor
         return txt;
     }
 
-    public decimal Preview(string clientKind, int clientDone, List<TransferItem> items)
+    public decimal Preview(ClientKind clientKind, int clientDone, List<TransferItem> items)
     {
         decimal s = 0m;
         foreach (var it in items)
@@ -118,12 +118,12 @@ public class LegacyTransferProcessor
         }
 
         decimal d = 0m;
-        if (clientKind == "vip")
+        if (clientKind == ClientKind.Vip)
         {
             d = s * PricingRules.VipRate;
             if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
         }
-        else if (clientKind == "staff")
+        else if (clientKind == ClientKind.Staff)
         {
             d = s * PricingRules.StaffRate;
             if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
@@ -142,7 +142,7 @@ public class LegacyTransferProcessor
     public string DescribeClient(WarehouseClient c)
     {
         string s = c.Name.Trim().ToUpper();
-        if (c.Kind == "vip") s += " [VIP]";
+        if (c.Kind == ClientKind.Vip) s += " [VIP]";
         if (c.DoneCount > PricingRules.LoyaltyThreshold) s += " [ЛОЯЛЬНИЙ]";
         s += " <" + c.Email.ToLower() + ">";
         int years = DateTime.Now.Year - c.SinceUtc.Year;
