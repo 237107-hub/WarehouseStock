@@ -15,8 +15,16 @@ public class WarehouseClient
     public string Describe()
     {
         string s = Name.Trim().ToUpper(System.Globalization.CultureInfo.CurrentCulture);
-        if (Kind == ClientKind.Vip) s += " [VIP]";
-        if (DoneCount > PricingRules.LoyaltyThreshold) s += " [ЛОЯЛЬНИЙ]";
+        if (Kind == ClientKind.Vip)
+        {
+            s += " [VIP]";
+        }
+
+        if (DoneCount > PricingRules.LoyaltyThreshold)
+        {
+            s += " [ЛОЯЛЬНИЙ]";
+        }
+
         s += " <" + Email.ToLower(System.Globalization.CultureInfo.CurrentCulture) + ">";
         int years = DateTime.Now.Year - SinceUtc.Year;
         s += " стаж " + years;
@@ -39,7 +47,11 @@ public class LegacyTransferProcessor
     public string Handle(TransferRequest request)
     {
         string? error = Validate(request.Items, request.State, request.Client.Email);
-        if (error != null) return error;
+        if (error != null)
+        {
+            return error;
+        }
+
         _log.Add("ok " + request.DocumentId);
 
         decimal subtotal = Subtotal(request.Items!);
@@ -58,17 +70,37 @@ public class LegacyTransferProcessor
 
     private static string? Validate(List<TransferItem>? items, DocState state, string? mail)
     {
-        if (items == null) return "ERR: null";
-        if (items.Count == 0) return "ERR: empty";
-        if (state != DocState.New && state != DocState.Paid) return "ERR: state";
-        if (mail == null || !mail.Contains('@')) return "ERR: mail";
+        if (items == null)
+        {
+            return "ERR: null";
+        }
+
+        if (items.Count == 0)
+        {
+            return "ERR: empty";
+        }
+
+        if (state != DocState.New && state != DocState.Paid)
+        {
+            return "ERR: state";
+        }
+
+        if (mail == null || !mail.Contains('@'))
+        {
+            return "ERR: mail";
+        }
+
         return null;
     }
 
     private static decimal Subtotal(List<TransferItem> items)
     {
         decimal sum = 0m;
-        foreach (var item in items) sum += item.Qty * item.Price;
+        foreach (var item in items)
+        {
+            sum += item.Qty * item.Price;
+        }
+
         return sum;
     }
 
@@ -82,7 +114,11 @@ public class LegacyTransferProcessor
     public string DumpLog()
     {
         string r = "";
-        foreach (var l in _log) r += l + "\n";
+        foreach (var l in _log)
+        {
+            r += l + "\n";
+        }
+
         return r;
     }
 }
