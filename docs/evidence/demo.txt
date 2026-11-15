@@ -1,0 +1,14 @@
+$ dotnet run --project src/Legacy.Demo -c Release --no-build
+ЛР6 / WarehouseStock / варіант 6
+Документ #1001
+Клієнт: Іван
+A-1 x2 = 300.00 UAH
+B-2 x1 = 400.00 UAH
+Знижка: 105.00 UAH
+Доставка: 60.00 UAH
+Разом: 655.00 UAH
+Журнал (імітація надсилання, без реального листа):
+ok 1001
+mail -> a@b
+Помилка порожнього документа:
+ERR: empty

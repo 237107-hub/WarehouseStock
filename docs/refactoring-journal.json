@@ -1,0 +1,56 @@
+[
+  {
+    "step": 1,
+    "commit": "9837d4aea069f12ac31ef9894af7672a193fa730",
+    "change": "replace seven business magic numbers with named constants",
+    "tests": "passed"
+  },
+  {
+    "step": 2,
+    "commit": "68f0333e7b7273ced782f091a8476daa54725607",
+    "change": "replace string type codes with enums and mutable properties",
+    "tests": "passed"
+  },
+  {
+    "step": 3,
+    "commit": "f239971bde3482d659ae38e4bb151881d9df7509",
+    "change": "replace nested validation with ordered guard clauses",
+    "tests": "passed"
+  },
+  {
+    "step": 4,
+    "commit": "33e88b82cd59f07ea9d6de578ffd1c0dfef0094e",
+    "change": "extract subtotal discount and shipping methods",
+    "tests": "passed"
+  },
+  {
+    "step": 5,
+    "commit": "5953d13336453846105b71e8c66affad65a4adce",
+    "change": "reuse shared calculations in Preview and remove duplicate algorithm",
+    "tests": "passed"
+  },
+  {
+    "step": 6,
+    "commit": "27a126202e9848496d769dbc050edbf72a113ee7",
+    "change": "extract DiscountPolicy ShippingPolicy and ReportBuilder",
+    "tests": "passed"
+  },
+  {
+    "step": 7,
+    "commit": "c7ec54ec4eec863f0c444c5f800e0f8ced065502",
+    "change": "introduce TransferRequest and remove unused primitive parameters",
+    "tests": "passed"
+  },
+  {
+    "step": 8,
+    "commit": "a1cb20355d7c0779e5ef325bfc803f9feca16154",
+    "change": "move client description to WarehouseClient preserving clock and culture",
+    "tests": "passed"
+  },
+  {
+    "step": 9,
+    "commit": "56a1877789f19391a684954dd076d9f7e3632755",
+    "change": "replace temporary instance fields with method local variables",
+    "tests": "passed"
+  }
+]
