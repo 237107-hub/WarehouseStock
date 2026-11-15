@@ -108,32 +108,9 @@ public class LegacyTransferProcessor
 
     public decimal Preview(ClientKind clientKind, int clientDone, List<TransferItem> items)
     {
-        decimal s = 0m;
-        foreach (var it in items)
-        {
-            s += it.Qty * it.Price;
-        }
-
-        decimal d = 0m;
-        if (clientKind == ClientKind.Vip)
-        {
-            d = s * PricingRules.VipRate;
-            if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
-        }
-        else if (clientKind == ClientKind.Staff)
-        {
-            d = s * PricingRules.StaffRate;
-            if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
-        }
-        else if (clientDone > PricingRules.LoyaltyThreshold)
-        {
-            d = s * PricingRules.LoyalRate;
-            if (d > PricingRules.MaximumDiscount) d = PricingRules.MaximumDiscount;
-        }
-
-        decimal sh = 0m;
-        if (s - d < PricingRules.FreeShippingThreshold) sh = PricingRules.DeliveryFee;
-        return s - d + sh;
+        decimal sum = Subtotal(items);
+        decimal discount = DiscountOf(sum, clientKind, clientDone);
+        return sum - discount + ShippingOf(sum - discount);
     }
 
     public string DescribeClient(WarehouseClient c)
